@@ -6,8 +6,8 @@
         public string username { get; set; }
         public string email { get; set; }
         public string password { get; set; }
-        public DateTime createdDate { get; set; }
-        public DateTime updatedDate { get; set; }
+        public DateTime Created_Date { get; set; }
+        public DateTime Updated_Date { get; set; }
 
 
     }

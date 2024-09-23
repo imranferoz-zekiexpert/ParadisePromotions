@@ -16,7 +16,7 @@ namespace ParadisePromotions.Core.Services
         {
             if (user != null)
             {
-                user.createdDate = DateTime.Now;
+                user.Created_Date = DateTime.Now;
                 await _unitOfWork.Users.Insert(user);
                 var result = _unitOfWork.Save();
 
@@ -83,8 +83,8 @@ namespace ParadisePromotions.Core.Services
             existingUser.username = user.username;
             existingUser.email = user.email;
             existingUser.password = user.password;
-            existingUser.createdDate = user.createdDate;
-            existingUser.updatedDate = DateTime.Now;
+            existingUser.Created_Date = user.Created_Date;
+            existingUser.Updated_Date = DateTime.Now;
 
             _unitOfWork.Users.Update(existingUser);
 
