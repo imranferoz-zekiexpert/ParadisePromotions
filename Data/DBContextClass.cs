@@ -8,7 +8,7 @@ namespace ParadisePromotions.Data
     {
         public DBContextClass(DbContextOptions<DBContextClass> options) : base(options) { }
 
-    DbSet<UserModel> users { get; set; } = null!;
+    DbSet<Staff> staff { get; set; } = null!;
     }
 
 }

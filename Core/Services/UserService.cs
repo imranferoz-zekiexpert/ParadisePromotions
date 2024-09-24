@@ -18,11 +18,11 @@ namespace ParadisePromotions.Core.Services
             _unitOfWork = unitOfWork;
             _configuration = configuration;
         }
-        public async Task<bool> CreateUser(UserModel user)
+        public async Task<bool> CreateUser(Staff user)
         {
             if (user != null)
             {
-                user.Created_Date = DateTime.Now;
+                user.Hire_date = DateTime.Now;
                 await _unitOfWork.Users.Insert(user);
                 var result = _unitOfWork.Save();
 
@@ -53,13 +53,13 @@ namespace ParadisePromotions.Core.Services
             return false;
         }
 
-        public async Task<IEnumerable<UserModel>> GetAllUsers()
+        public async Task<IEnumerable<Staff>> GetAllUsers()
         {
             var users = await _unitOfWork.Users.GetAll();
             return users; ;
         }
 
-        public async Task<UserModel> GetUserById(int id)
+        public async Task<Staff> GetUserById(int id)
         {
             if (id > 0)
             {
@@ -72,25 +72,26 @@ namespace ParadisePromotions.Core.Services
             return null;
         }
 
-        public async Task<bool> UpdateUser(UserModel user)
+        public async Task<bool> UpdateUser(Staff user)
         {
             if (user == null)
             {
                 return false;
             }
 
-            var existingUser = await _unitOfWork.Users.GetById(user.id);
+            var existingUser = await _unitOfWork.Users.GetById(user.ID);
             if (existingUser == null)
             {
                 return false;
             }
 
             // Update the properties of the existing user
-            existingUser.username = user.username;
-            existingUser.email = user.email;
-            existingUser.password = user.password;
-            existingUser.Created_Date = user.Created_Date;
-            existingUser.Updated_Date = DateTime.Now;
+            // Update the properties of the existing user
+            existingUser.Name = user.Name;
+            existingUser.SSN = user.SSN;
+            existingUser.Password = user.Password;
+            existingUser.Hire_date = user.Hire_date;
+
 
             _unitOfWork.Users.Update(existingUser);
 
@@ -100,21 +101,21 @@ namespace ParadisePromotions.Core.Services
 
         public async Task<LoginResponceModel> Login([FromBody] LoginRequestModel User)
         {
-            if (string.IsNullOrEmpty(User.Username) || string.IsNullOrEmpty(User.Password))
+            if (string.IsNullOrEmpty(User.Name) || string.IsNullOrEmpty(User.Password))
             {
                 return null; // Username or password is empty
             }
 
             // Find user by username (assuming unique usernames)
             var users = await _unitOfWork.Users.GetAll();
-            var user = users.FirstOrDefault(u => u.username == User.Username && u.password == User.Password);
+            var user = users.FirstOrDefault(u => u.Name == User.Name && u.Password == User.Password);
             if (user == null)
             {
                 return null; // User with the given username does not exist
             }
 
             // Check if the provided password matches the stored password hash
-            if (!VerifyPasswordHash(User.Password, user.password))
+            if (!VerifyPasswordHash(User.Password, user.Password))
             {
                 return null; // Password does not match
             }
@@ -125,7 +126,7 @@ namespace ParadisePromotions.Core.Services
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                   new Claim(ClaimTypes.Name, User.Username)
+                   new Claim(ClaimTypes.Name, User.Name)
                 }),
                 Expires = DateTime.UtcNow.AddMinutes(30),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
@@ -135,7 +136,7 @@ namespace ParadisePromotions.Core.Services
 
             return new LoginResponceModel
             {
-                Username = User.Username,
+                Name = User.Name,
                 token = userToken
             };
         }

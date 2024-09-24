@@ -1,6 +1,5 @@
 ﻿
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ParadisePromotions.Core.Interfaces.IServices;
 using ParadisePromotions.Core.Models;
@@ -34,7 +33,7 @@ namespace ParadisePromotions.Controllers
 
         [HttpPost]
         [Route("AddUser")]
-        public async Task<IActionResult> CreateUser([FromBody] UserModel model)
+        public async Task<IActionResult> CreateUser([FromBody] Staff model)
         {
             if (ModelState.IsValid)
             {
@@ -81,10 +80,10 @@ namespace ParadisePromotions.Controllers
         }
 
         [HttpPut("UpdateUser")]
-        public async Task<IActionResult> UpdateUser([FromBody] UserModel user)
+        public async Task<IActionResult> UpdateUser([FromBody] Staff user)
         {
             // Validate the incoming user object
-            if (user == null || user.id <= 0)
+            if (user == null || user.ID <= 0)
             {
                 return BadRequest(new { message = "Invalid user data" });
             }

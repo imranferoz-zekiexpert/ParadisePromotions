@@ -4,7 +4,7 @@ using ParadisePromotions.Data;
 
 namespace ParadisePromotions.Core.Repositories
 {
-    public class UserRepository :GenericRepository<UserModel>, IUserRepository
+    public class UserRepository :GenericRepository<Staff>, IUserRepository
     {
         public UserRepository(DBContextClass dbContext):base(dbContext) { }
     }
