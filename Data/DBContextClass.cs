@@ -8,7 +8,8 @@ namespace ParadisePromotions.Data
     {
         public DBContextClass(DbContextOptions<DBContextClass> options) : base(options) { }
 
-    DbSet<Staff> staff { get; set; } = null!;
+    DbSet<Staff> Staff { get; set; } = null!;
+    DbSet<Products> Products { get; set; } = null!;
     }
 
 }

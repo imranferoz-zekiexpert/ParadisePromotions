@@ -2,13 +2,12 @@
 
 namespace ParadisePromotions.Core.Interfaces.IServices
 {
-    public interface IUserService
+    public interface IProductsService
     {
-        Task<bool> CreateUser(Staff user);
-        Task<IEnumerable<Staff>> GetAllUsers();
-        Task<Staff> GetUserById(int id);
-        Task<bool> UpdateUser(Staff user);
-        Task<bool> DeleteUser(int id);
-        Task<LoginResponceModel> Login(LoginRequestModel model);
+        Task<bool> CreateProduct(Products product);
+        Task<IEnumerable<Products>> GetAllProducts();
+        Task<Products> GetProductById(int id);
+        Task<bool> UpdateProduct(Products product);
+        Task<bool> DeleteProduct(int id);
     }
 }

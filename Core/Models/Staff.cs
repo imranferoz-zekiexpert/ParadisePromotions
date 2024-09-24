@@ -9,7 +9,8 @@
         public string Class { get; set; }
         public string Password { get; set; }
         public bool isAdmin { get; set; }
-        public bool isVarifier { get; set; }
+        public bool IsVerifier { get; set; }
+        public bool IsActiveReloader { get; set; }
         public bool Active { get; set; }
 
 

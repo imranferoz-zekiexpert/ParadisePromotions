@@ -8,14 +8,17 @@ namespace ParadisePromotions.Core.Repositories
     {
         private readonly DBContextClass _dbContext;
         public IUserRepository Users { get; }
+        public IProductsRepository Products { get; }
 
         public UnitOfWork(
             DBContextClass dbContext,
-            IUserRepository userRepository
+            IUserRepository userRepository,
+            IProductsRepository productsRepository
             )
         {
             _dbContext = dbContext;
             Users = userRepository;
+            Products = productsRepository;
         }
 
         public int Save()

@@ -2,7 +2,7 @@
 
 namespace ParadisePromotions.Core.Interfaces
 {
-    public interface IProductsRepository:IGenericRepository<Products>
+    public interface IUserRepository:IGenericRepository<Staff>
     {
     }
 }

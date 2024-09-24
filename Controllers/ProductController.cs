@@ -8,20 +8,20 @@ namespace ParadisePromotions.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AdminController : ControllerBase
+    public class ProductController : ControllerBase
     {
-        private readonly IUserService _userService;
-        public AdminController(IUserService userService)
+        private readonly IProductsService _productsService;
+        public ProductController(IProductsService productsService)
         {
-            _userService = userService;
+            _productsService = productsService;
         }
         [HttpGet]
-        [Route("Users")]
-        public async Task<IActionResult> GetUsers()
+        [Route("Products")]
+        public async Task<IActionResult> GetProducts()
         {
             try
             {
-                var users = await _userService.GetAllUsers();
+                var users = await _productsService.GetAllProducts();
                 return Ok(users);
             }
             catch (Exception ex)
@@ -32,15 +32,15 @@ namespace ParadisePromotions.Controllers
         }
 
         [HttpPost]
-        [Route("AddUser")]
-        public async Task<IActionResult> CreateUser([FromBody] Staff model)
+        [Route("AddProduct")]
+        public async Task<IActionResult> CreateProduct([FromBody] Products model)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    await _userService.CreateUser(model);
-                    return Ok(new { message = "User created successfully" });
+                    await _productsService.CreateProduct(model);
+                    return Ok(new { message = "Product created successfully" });
                 }
                 catch (Exception ex)
                 {
@@ -50,37 +50,26 @@ namespace ParadisePromotions.Controllers
 
             return BadRequest(ModelState);
         }
+        
 
-        [HttpPost("Login")]
-        [AllowAnonymous]
-        public async Task<IActionResult>  Login(LoginRequestModel User)
-        {
-           var user = await _userService.Login(User);
-            if (user == null)
-            {
-                return BadRequest(new { message = "UserName or Password is incorrect" });
-            }
-            return Ok(user);
-        }
-
-        [HttpGet("User/{id}")]
-        public async Task<IActionResult> GetUserById(int id)
+        [HttpGet("Product/{id}")]
+        public async Task<IActionResult> GetProductById(int id)
         {
             // Call the service method to get the user by id
-            var user = await _userService.GetUserById(id);
+            var user = await _productsService.GetProductById(id);
 
             // Check if the user is null (i.e., user not found or invalid id)
             if (user == null)
             {
-                return NotFound(new { message = "User not found" });
+                return NotFound(new { message = "Product not found" });
             }
 
             // Return the found user
             return Ok(user);
         }
 
-        [HttpPut("UpdateUser")]
-        public async Task<IActionResult> UpdateUser([FromBody] Staff user)
+        [HttpPut("UpdateProduct")]
+        public async Task<IActionResult> UpdateProduct([FromBody] Products user)
         {
             // Validate the incoming user object
             if (user == null || user.ID <= 0)
@@ -89,32 +78,32 @@ namespace ParadisePromotions.Controllers
             }
 
             // Call the service to update the user
-            var isUpdated = await _userService.UpdateUser(user);
+            var isUpdated = await _productsService.UpdateProduct(user);
 
             // Check if the update was successful
             if (!isUpdated)
             {
-                return NotFound(new { message = "User not found or update failed" });
+                return NotFound(new { message = "Product not found or update failed" });
             }
 
             // Return a success response
-            return Ok(new { message = "User updated successfully" });
+            return Ok(new { message = "Product updated successfully" });
         }
 
-        [HttpDelete("DeleteUser/{id}")]
-        public async Task<IActionResult> DeleteUser(int id)
+        [HttpDelete("DeleteProduct/{id}")]
+        public async Task<IActionResult> DeleteProduct(int id)
         {
             // Call the service method to delete the user
-            var isDeleted = await _userService.DeleteUser(id);
+            var isDeleted = await _productsService.DeleteProduct(id);
 
             // If deletion was unsuccessful, return a not found or bad request response
             if (!isDeleted)
             {
-                return NotFound(new { message = "User not found or deletion failed." });
+                return NotFound(new { message = "Product not found or deletion failed." });
             }
 
             // If deletion was successful
-            return Ok(new { message = "User deleted successfully" });
+            return Ok(new { message = "Product deleted successfully" });
         }
 
 

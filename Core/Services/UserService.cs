@@ -86,18 +86,24 @@ namespace ParadisePromotions.Core.Services
             }
 
             // Update the properties of the existing user
-            // Update the properties of the existing user
             existingUser.Name = user.Name;
             existingUser.SSN = user.SSN;
             existingUser.Password = user.Password;
             existingUser.Hire_date = user.Hire_date;
+            existingUser.Class = user.Class;
+            existingUser.isAdmin = user.isAdmin;
+            existingUser.IsVerifier = user.IsVerifier;
+            existingUser.IsActiveReloader = user.IsActiveReloader;
+            existingUser.Active = user.Active;
 
-
+            // Perform the update in the database
             _unitOfWork.Users.Update(existingUser);
 
-            var result =  _unitOfWork.Save();
+            // Save the changes
+            var result = _unitOfWork.Save();
             return result > 0;
         }
+
 
         public async Task<LoginResponceModel> Login([FromBody] LoginRequestModel User)
         {
