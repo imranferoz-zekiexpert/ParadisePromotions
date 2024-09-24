@@ -1,4 +1,5 @@
 ﻿
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ParadisePromotions.Core.Interfaces.IServices;
@@ -16,7 +17,7 @@ namespace ParadisePromotions.Controllers
             _userService = userService;
         }
         [HttpGet]
-        [Route("/Users")]
+        [Route("Users")]
         public async Task<IActionResult> GetUsers()
         {
             try
@@ -40,7 +41,7 @@ namespace ParadisePromotions.Controllers
                 try
                 {
                     await _userService.CreateUser(model);
-                    return Ok(true); 
+                    return Ok(new { message = "User created successfully" });
                 }
                 catch (Exception ex)
                 {
@@ -50,6 +51,73 @@ namespace ParadisePromotions.Controllers
 
             return BadRequest(ModelState);
         }
+
+        [HttpPost("Login")]
+        [AllowAnonymous]
+        public async Task<IActionResult>  Login(LoginRequestModel User)
+        {
+           var user = await _userService.Login(User);
+            if (user == null)
+            {
+                return BadRequest(new { message = "UserName or Password is incorrect" });
+            }
+            return Ok(user);
+        }
+
+        [HttpGet("User/{id}")]
+        public async Task<IActionResult> GetUserById(int id)
+        {
+            // Call the service method to get the user by id
+            var user = await _userService.GetUserById(id);
+
+            // Check if the user is null (i.e., user not found or invalid id)
+            if (user == null)
+            {
+                return NotFound(new { message = "User not found" });
+            }
+
+            // Return the found user
+            return Ok(user);
+        }
+
+        [HttpPut("UpdateUser")]
+        public async Task<IActionResult> UpdateUser([FromBody] UserModel user)
+        {
+            // Validate the incoming user object
+            if (user == null || user.id <= 0)
+            {
+                return BadRequest(new { message = "Invalid user data" });
+            }
+
+            // Call the service to update the user
+            var isUpdated = await _userService.UpdateUser(user);
+
+            // Check if the update was successful
+            if (!isUpdated)
+            {
+                return NotFound(new { message = "User not found or update failed" });
+            }
+
+            // Return a success response
+            return Ok(new { message = "User updated successfully" });
+        }
+
+        [HttpDelete("DeleteUser/{id}")]
+        public async Task<IActionResult> DeleteUser(int id)
+        {
+            // Call the service method to delete the user
+            var isDeleted = await _userService.DeleteUser(id);
+
+            // If deletion was unsuccessful, return a not found or bad request response
+            if (!isDeleted)
+            {
+                return NotFound(new { message = "User not found or deletion failed." });
+            }
+
+            // If deletion was successful
+            return Ok(new { message = "User deleted successfully" });
+        }
+
 
     }
 }

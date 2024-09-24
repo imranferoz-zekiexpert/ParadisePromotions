@@ -1,16 +1,22 @@
-﻿using ParadisePromotions.Core.Interfaces;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
+using ParadisePromotions.Core.Interfaces;
 using ParadisePromotions.Core.Interfaces.IServices;
 using ParadisePromotions.Core.Models;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 
 namespace ParadisePromotions.Core.Services
 {
     public class UserService : IUserService
     {
         public IUnitOfWork _unitOfWork;
-
-        public UserService(IUnitOfWork unitOfWork)
+        private readonly IConfiguration _configuration;
+        public UserService(IUnitOfWork unitOfWork, IConfiguration configuration)
         {
             _unitOfWork = unitOfWork;
+            _configuration = configuration;
         }
         public async Task<bool> CreateUser(UserModel user)
         {
@@ -92,36 +98,52 @@ namespace ParadisePromotions.Core.Services
             return result > 0;
         }
 
-        public async Task<UserModel> Login(string username, string password)
+        public async Task<LoginResponceModel> Login([FromBody] LoginRequestModel User)
         {
-            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+            if (string.IsNullOrEmpty(User.Username) || string.IsNullOrEmpty(User.Password))
             {
                 return null; // Username or password is empty
             }
 
             // Find user by username (assuming unique usernames)
             var users = await _unitOfWork.Users.GetAll();
-            var user = users.FirstOrDefault(u => u.username == username && u.password == password);
+            var user = users.FirstOrDefault(u => u.username == User.Username && u.password == User.Password);
             if (user == null)
             {
                 return null; // User with the given username does not exist
             }
 
             // Check if the provided password matches the stored password hash
-            if (!VerifyPasswordHash(password, user.password))
+            if (!VerifyPasswordHash(User.Password, user.password))
             {
                 return null; // Password does not match
             }
 
-            // Password matches, return the user
-            return user;
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.ASCII.GetBytes(_configuration["Jwt:Key"]);
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new Claim[]
+                {
+                   new Claim(ClaimTypes.Name, User.Username)
+                }),
+                Expires = DateTime.UtcNow.AddMinutes(30),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+            };
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            string userToken = tokenHandler.WriteToken(token);
+
+            return new LoginResponceModel
+            {
+                Username = User.Username,
+                token = userToken
+            };
         }
 
         private bool VerifyPasswordHash(string password, string storedHash)
         {
             return password == storedHash;
         }
-
 
     }
 }

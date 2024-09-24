@@ -9,6 +9,6 @@ namespace ParadisePromotions.Core.Interfaces.IServices
         Task<UserModel> GetUserById(int id);
         Task<bool> UpdateUser(UserModel user);
         Task<bool> DeleteUser(int id);
-        Task<UserModel> Login(string username,string password);
+        Task<LoginResponceModel> Login(LoginRequestModel model);
     }
 }
