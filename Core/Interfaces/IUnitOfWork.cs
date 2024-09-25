@@ -4,6 +4,10 @@
     {
         IUserRepository Users { get; }
         IProductsRepository Products { get; }
+        ICustomersRepository Customers { get; }
+        IInvoiceDetailsRepository InvoiceDetails { get; }
+        IBlankSalesRepository BlankSales { get; }
+        IInvoicesRepository Invoices { get; }
         int Save();
     }
 }

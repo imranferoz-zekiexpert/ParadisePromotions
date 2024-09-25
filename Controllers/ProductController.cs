@@ -21,8 +21,8 @@ namespace ParadisePromotions.Controllers
         {
             try
             {
-                var users = await _productsService.GetAllProducts();
-                return Ok(users);
+                var products = await _productsService.GetAllProducts();
+                return Ok(products);
             }
             catch (Exception ex)
             {
@@ -55,30 +55,30 @@ namespace ParadisePromotions.Controllers
         [HttpGet("Product/{id}")]
         public async Task<IActionResult> GetProductById(int id)
         {
-            // Call the service method to get the user by id
-            var user = await _productsService.GetProductById(id);
+            // Call the service method to get the product by id
+            var product = await _productsService.GetProductById(id);
 
-            // Check if the user is null (i.e., user not found or invalid id)
-            if (user == null)
+            // Check if the product is null (i.e., product not found or invalid id)
+            if (product == null)
             {
                 return NotFound(new { message = "Product not found" });
             }
 
-            // Return the found user
-            return Ok(user);
+            // Return the found product
+            return Ok(product);
         }
 
         [HttpPut("UpdateProduct")]
-        public async Task<IActionResult> UpdateProduct([FromBody] Products user)
+        public async Task<IActionResult> UpdateProduct([FromBody] Products product)
         {
-            // Validate the incoming user object
-            if (user == null || user.ID <= 0)
+            // Validate the incoming product object
+            if (product == null || product.ID <= 0)
             {
-                return BadRequest(new { message = "Invalid user data" });
+                return BadRequest(new { message = "Invalid product data" });
             }
 
-            // Call the service to update the user
-            var isUpdated = await _productsService.UpdateProduct(user);
+            // Call the service to update the product
+            var isUpdated = await _productsService.UpdateProduct(product);
 
             // Check if the update was successful
             if (!isUpdated)
@@ -93,7 +93,7 @@ namespace ParadisePromotions.Controllers
         [HttpDelete("DeleteProduct/{id}")]
         public async Task<IActionResult> DeleteProduct(int id)
         {
-            // Call the service method to delete the user
+            // Call the service method to delete the product
             var isDeleted = await _productsService.DeleteProduct(id);
 
             // If deletion was unsuccessful, return a not found or bad request response

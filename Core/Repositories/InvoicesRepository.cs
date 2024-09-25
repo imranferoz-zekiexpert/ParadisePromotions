@@ -4,8 +4,8 @@ using ParadisePromotions.Data;
 
 namespace ParadisePromotions.Core.Repositories
 {
-    public class ProductsRepository :GenericRepository<Products>, IProductsRepository
+    public class InvoicesRepository :GenericRepository<Invoice>, IInvoicesRepository
     {
-        public ProductsRepository(DBContextClass dbContext):base(dbContext) { }
+        public InvoicesRepository(DBContextClass dbContext):base(dbContext) { }
     }
 }
