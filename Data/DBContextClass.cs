@@ -14,6 +14,7 @@ namespace ParadisePromotions.Data
     DbSet<InvoiceDetail> InvoiceDetails { get; set; } = null!;
     DbSet<BlankSale> BlankSales { get; set; } = null!;
     DbSet<Invoice> Invoices { get; set; } = null!;
+    DbSet<QryBlankSalePrintGreenSheetMain> QryBlankSalePrintGreenSheetMain { get; set; } = null!;
     }
 
 }

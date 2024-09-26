@@ -8,6 +8,7 @@
         IInvoiceDetailsRepository InvoiceDetails { get; }
         IBlankSalesRepository BlankSales { get; }
         IInvoicesRepository Invoices { get; }
+        IQryBlankSalePrintGreenSheetMainRepository QryBlankSalePrintGreenSheetMain { get; }
         int Save();
     }
 }

@@ -13,6 +13,7 @@ namespace ParadisePromotions.Core.Repositories
         public IInvoiceDetailsRepository InvoiceDetails { get; }
         public IBlankSalesRepository BlankSales { get; }
         public IInvoicesRepository Invoices { get; }
+        public IQryBlankSalePrintGreenSheetMainRepository QryBlankSalePrintGreenSheetMain { get; }
 
         public UnitOfWork(
             DBContextClass dbContext,
@@ -21,7 +22,8 @@ namespace ParadisePromotions.Core.Repositories
             ICustomersRepository customersRepository,
             IInvoiceDetailsRepository invoiceDetailsRepository,
             IBlankSalesRepository blankSalesRepository,
-            IInvoicesRepository invoicesRepository
+            IInvoicesRepository invoicesRepository,
+            IQryBlankSalePrintGreenSheetMainRepository qryBlankSalePrintGreenSheetMain
             )
         {
             _dbContext = dbContext;
@@ -31,6 +33,7 @@ namespace ParadisePromotions.Core.Repositories
             InvoiceDetails = invoiceDetailsRepository;
             BlankSales = blankSalesRepository;
             Invoices = invoicesRepository;
+            QryBlankSalePrintGreenSheetMain = qryBlankSalePrintGreenSheetMain;
         }
 
         public int Save()

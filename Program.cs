@@ -23,6 +23,8 @@ builder.Services.AddScoped<IBlankSalesRepository, BlankSalesRepository>();
 builder.Services.AddScoped<IBlankSalesService, BlankSalesService>();
 builder.Services.AddScoped<IInvoicesRepository, InvoicesRepository>();
 builder.Services.AddScoped<IInvoicesService, InvoicesService>();
+builder.Services.AddScoped<IQryBlankSalePrintGreenSheetMainRepository, QryBlankSalePrintGreenSheetMainRepository>();
+builder.Services.AddScoped<IQryBlankSalePrintGreenSheetMainService, QryBlankSalePrintGreenSheetMainService>();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
