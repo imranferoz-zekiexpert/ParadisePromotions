@@ -71,23 +71,29 @@ namespace ParadisePromotions.Controllers
         [HttpPut("UpdateSalePrintGreenSheet")]
         public async Task<IActionResult> UpdateSalePrintGreenSheet([FromBody] QryBlankSalePrintGreenSheetMain sheet)
         {
-            // Validate the incoming blankSale object
-            if (sheet == null || sheet.ID < 0)
+            try
             {
-                return BadRequest(new { message = "Invalid SalePrintGreenSheet data" });
-            }
+                // Validate the incoming blankSale object
+                if (sheet == null || sheet.ID < 0)
+                {
+                    return BadRequest(new { message = "Invalid SalePrintGreenSheet data" });
+                }
 
-            // Call the service to update the blankSale
-            var isUpdated = await _qryBlankSalePrintGreenSheetMainService.UpdateSalePrintGreenSheet(sheet);
+                // Call the service to update the blankSale
+                var isUpdated = await _qryBlankSalePrintGreenSheetMainService.UpdateSalePrintGreenSheet(sheet);
 
-            // Check if the update was successful
-            if (!isUpdated)
+                // Check if the update was successful
+                if (!isUpdated)
+                {
+                    return NotFound(new { message = "SalePrintGreenSheet not found or update failed" });
+                }
+
+                // Return a success response
+                return Ok(new { message = "SalePrintGreenSheet updated successfully" });
+            }catch(Exception ex)
             {
-                return NotFound(new { message = "SalePrintGreenSheet not found or update failed" });
+               return BadRequest(new { message = ex}); ;
             }
-
-            // Return a success response
-            return Ok(new { message = "SalePrintGreenSheet updated successfully" });
         }
 
         [HttpDelete("DeleteSalePrintGreenSheet/{id}")]
@@ -99,11 +105,11 @@ namespace ParadisePromotions.Controllers
             // If deletion was unsuccessful, return a not found or bad request response
             if (!isDeleted)
             {
-                return NotFound(new { message = "BlankSale not found or deletion failed." });
+                return NotFound(new { message = "SalePrintGreenSheet not found or deletion failed." });
             }
 
             // If deletion was successful
-            return Ok(new { message = "BlankSale deleted successfully" });
+            return Ok(new { message = "SalePrintGreenSheet deleted successfully" });
         }
 
 

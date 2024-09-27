@@ -77,7 +77,7 @@ namespace ParadisePromotions.Core.Services
                 return false;
             }
 
-            var existingBlankSale = await _unitOfWork.QryBlankSalePrintGreenSheetMain.GetById(sheet.Invoice_ID); // Assuming Invoice_ID is the ID
+            var existingBlankSale = await _unitOfWork.QryBlankSalePrintGreenSheetMain.GetById(sheet.ID); // Assuming Invoice_ID is the ID
             if (existingBlankSale == null)
             {
                 return false;
@@ -88,6 +88,7 @@ namespace ParadisePromotions.Core.Services
             existingBlankSale.Invoice_ID = sheet.Invoice_ID;
             existingBlankSale.Customer_ID = sheet.Customer_ID;
             existingBlankSale.Sale_Date = sheet.Sale_Date;
+            existingBlankSale.Name = sheet.Name;
             existingBlankSale.Print_Location = sheet.Print_Location;
             existingBlankSale.First_Name = sheet.First_Name;
             existingBlankSale.Trouble = sheet.Trouble;
