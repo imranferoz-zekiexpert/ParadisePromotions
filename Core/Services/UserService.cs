@@ -79,13 +79,14 @@ namespace ParadisePromotions.Core.Services
                 return false;
             }
 
-            var existingUser = await _unitOfWork.Users.GetById(user.ID);
+            var existingUser = await _unitOfWork.Users.GetById(user.StaffID);
             if (existingUser == null)
             {
                 return false;
             }
 
             // Update the properties of the existing user
+            existingUser.StaffID = user.StaffID;
             existingUser.Name = user.Name;
             existingUser.SSN = user.SSN;
             existingUser.Password = user.Password;

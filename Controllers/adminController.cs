@@ -83,7 +83,7 @@ namespace ParadisePromotions.Controllers
         public async Task<IActionResult> UpdateUser([FromBody] Staff user)
         {
             // Validate the incoming user object
-            if (user == null || user.ID <= 0)
+            if (user == null || user.StaffID <= 0)
             {
                 return BadRequest(new { message = "Invalid user data" });
             }

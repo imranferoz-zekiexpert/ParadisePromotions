@@ -56,7 +56,7 @@ namespace ParadisePromotions.Core.Services
         public async Task<IEnumerable<Customer>> GetAllCustomers()
         {
             var customers = await _unitOfWork.Customers.GetAll();
-            return customers; ;
+            return customers;
         }
 
         public async Task<Customer> GetCustomerById(int id)

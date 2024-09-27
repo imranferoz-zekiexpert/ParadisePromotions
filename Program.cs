@@ -17,6 +17,7 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IProductsRepository, ProductsRepository>();
 builder.Services.AddScoped<IProductsService, ProductsService>();
 builder.Services.AddScoped<ICustomersRepository, CustomersRepository>();
+builder.Services.AddScoped<ICustomersService, CustomersService>();
 builder.Services.AddScoped<IInvoiceDetailsRepository, InvoiceDetailsRepository>();
 builder.Services.AddScoped<IInvoiceDetailsService, InvoiceDetailsService>();
 builder.Services.AddScoped<IBlankSalesRepository, BlankSalesRepository>();

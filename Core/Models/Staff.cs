@@ -2,7 +2,7 @@
 {
     public class Staff
     {
-        public int ID { get; set; }
+        public int StaffID { get; set; }
         public string Name { get; set; }
         public string SSN { get; set; }
         public DateTime Hire_date { get; set; }
