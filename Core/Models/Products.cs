@@ -5,8 +5,8 @@
     public int ID { get; set; }
     public string ProductID { get; set; }
 	public string ProductName { get; set; }
-	public decimal ParValue { get; set; }
-	public decimal ProCost { get; set; }
+	public decimal PerValue { get; set; }
+	public decimal PerCost { get; set; }
 	public bool Active { get; set; }
     }
 }

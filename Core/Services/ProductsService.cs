@@ -88,8 +88,8 @@ namespace ParadisePromotions.Core.Services
             // Update the properties of the existing product
             existingProduct.ProductID = product.ProductID;
             existingProduct.ProductName = product.ProductName;
-            existingProduct.ParValue = product.ParValue;
-            existingProduct.ProCost = product.ProCost;
+            existingProduct.PerValue = product.PerValue;
+            existingProduct.PerCost = product.PerCost;
             existingProduct.Active = product.Active;
 
             // Perform the update in the database
