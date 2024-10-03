@@ -24,6 +24,8 @@ builder.Services.AddScoped<IBlankSalesRepository, BlankSalesRepository>();
 builder.Services.AddScoped<IBlankSalesService, BlankSalesService>();
 builder.Services.AddScoped<IInvoicesRepository, InvoicesRepository>();
 builder.Services.AddScoped<IInvoicesService, InvoicesService>();
+builder.Services.AddScoped<IInventoryRepository, InventoryRepository>();
+builder.Services.AddScoped<IInventoryService, InventoryService>();
 builder.Services.AddScoped<IQryBlankSalePrintGreenSheetMainRepository, QryBlankSalePrintGreenSheetMainRepository>();
 builder.Services.AddScoped<IQryBlankSalePrintGreenSheetMainService, QryBlankSalePrintGreenSheetMainService>();
 builder.Services.AddControllers();

@@ -13,6 +13,7 @@ namespace ParadisePromotions.Core.Repositories
         public IInvoiceDetailsRepository InvoiceDetails { get; }
         public IBlankSalesRepository BlankSales { get; }
         public IInvoicesRepository Invoices { get; }
+        public IInventoryRepository Inventory { get; }
         public IQryBlankSalePrintGreenSheetMainRepository QryBlankSalePrintGreenSheetMain { get; }
 
         public UnitOfWork(
@@ -23,6 +24,7 @@ namespace ParadisePromotions.Core.Repositories
             IInvoiceDetailsRepository invoiceDetailsRepository,
             IBlankSalesRepository blankSalesRepository,
             IInvoicesRepository invoicesRepository,
+            IInventoryRepository inventoryRepository,
             IQryBlankSalePrintGreenSheetMainRepository qryBlankSalePrintGreenSheetMain
             )
         {
@@ -33,6 +35,7 @@ namespace ParadisePromotions.Core.Repositories
             InvoiceDetails = invoiceDetailsRepository;
             BlankSales = blankSalesRepository;
             Invoices = invoicesRepository;
+            Inventory = inventoryRepository;
             QryBlankSalePrintGreenSheetMain = qryBlankSalePrintGreenSheetMain;
         }
 
