@@ -1,6 +1,7 @@
 ﻿
 using Microsoft.EntityFrameworkCore;
 using ParadisePromotions.Core.Models;
+using ParadisePromotions.Core.Models.Codes;
 
 namespace ParadisePromotions.Data
 {
@@ -16,6 +17,15 @@ namespace ParadisePromotions.Data
     DbSet<Invoice> Invoices { get; set; } = null!;
     DbSet<Inventory> Inventory { get; set; } = null!;
     DbSet<QryBlankSalePrintGreenSheetMain> QryBlankSalePrintGreenSheetMain { get; set; } = null!;
+    // Setup Codes
+    DbSet<Zips> Zip { get; set; } = null!;
+    DbSet<SaleType> SaleType { get; set; } = null!;
+    DbSet<ReturnType> ReturnType { get; set; } = null!;
+    DbSet<ProductColor> ProductColor { get; set; } = null!;
+    DbSet<PrintLocation> PrintLocation { get; set; } = null!;
+    DbSet<PaymentMethod> PaymentMethod { get; set; } = null!;
+    DbSet<Cycles> Cycles { get; set; } = null!;
+    DbSet<Disposition> Disposition { get; set; } = null!;
     }
 
 }

@@ -1,4 +1,6 @@
 ﻿using ParadisePromotions.Core.Interfaces;
+using ParadisePromotions.Core.Interfaces.ICodes;
+using ParadisePromotions.Core.Repositories.Codes;
 using ParadisePromotions.Data;
 using System.Threading.Tasks;
 
@@ -15,6 +17,14 @@ namespace ParadisePromotions.Core.Repositories
         public IInvoicesRepository Invoices { get; }
         public IInventoryRepository Inventory { get; }
         public IQryBlankSalePrintGreenSheetMainRepository QryBlankSalePrintGreenSheetMain { get; }
+        public IZipRepository Zip { get; }
+        public ISaleTypeRepository SaleType { get; }
+        public IProductColorRepository ProductColor { get; }
+        public IPrintLocationRepository PrintLocation { get; }
+        public IPaymentMethodRepository PaymentMethod { get; }
+        public ICyclesRepository Cycles { get; }
+        public IDispositionRepository Disposition { get; }
+        public IReturnTypeRepository ReturnType { get; }
 
         public UnitOfWork(
             DBContextClass dbContext,
@@ -25,7 +35,15 @@ namespace ParadisePromotions.Core.Repositories
             IBlankSalesRepository blankSalesRepository,
             IInvoicesRepository invoicesRepository,
             IInventoryRepository inventoryRepository,
-            IQryBlankSalePrintGreenSheetMainRepository qryBlankSalePrintGreenSheetMain
+            IQryBlankSalePrintGreenSheetMainRepository qryBlankSalePrintGreenSheetMainRepository,
+            IZipRepository zipRepository,
+            ISaleTypeRepository saleTypeRepository,
+            IProductColorRepository productColorRepository,
+            IPrintLocationRepository printLocationRepository,
+            IPaymentMethodRepository paymentMethodRepository,
+            ICyclesRepository cyclesRepository,
+            IDispositionRepository dispositionRepository,
+            IReturnTypeRepository returnTypeRepository
             )
         {
             _dbContext = dbContext;
@@ -36,7 +54,15 @@ namespace ParadisePromotions.Core.Repositories
             BlankSales = blankSalesRepository;
             Invoices = invoicesRepository;
             Inventory = inventoryRepository;
-            QryBlankSalePrintGreenSheetMain = qryBlankSalePrintGreenSheetMain;
+            QryBlankSalePrintGreenSheetMain = qryBlankSalePrintGreenSheetMainRepository;
+            Zip = zipRepository;
+            SaleType = saleTypeRepository;
+            ProductColor = productColorRepository;
+            PrintLocation = printLocationRepository;
+            PaymentMethod = paymentMethodRepository;
+            Cycles = cyclesRepository;
+            Disposition = dispositionRepository;
+            ReturnType = returnTypeRepository;
         }
 
         public int Save()

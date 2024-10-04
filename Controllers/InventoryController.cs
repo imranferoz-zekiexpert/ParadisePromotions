@@ -15,6 +15,7 @@ namespace ParadisePromotions.Controllers
         {
             _inventoryService = inventoryService;
         }
+
         [HttpGet]
         [Route("Inventory")]
         public async Task<IActionResult> GetInventory()

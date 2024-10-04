@@ -1,4 +1,6 @@
-﻿namespace ParadisePromotions.Core.Interfaces
+﻿using ParadisePromotions.Core.Interfaces.ICodes;
+
+namespace ParadisePromotions.Core.Interfaces
 {
     public interface IUnitOfWork: IDisposable
     {
@@ -10,6 +12,14 @@
         IInvoicesRepository Invoices { get; }
         IInventoryRepository Inventory { get; }
         IQryBlankSalePrintGreenSheetMainRepository QryBlankSalePrintGreenSheetMain { get; }
+        IZipRepository Zip { get; }
+        ISaleTypeRepository SaleType { get; }
+        IProductColorRepository ProductColor { get; }
+        IPrintLocationRepository PrintLocation { get; }
+        IPaymentMethodRepository PaymentMethod { get; }
+        ICyclesRepository Cycles { get; }
+        IDispositionRepository Disposition { get; }
+        IReturnTypeRepository ReturnType { get; }
         int Save();
     }
 }

@@ -4,6 +4,8 @@ using ParadisePromotions.Core.Repositories;
 using ParadisePromotions.Core.Services;
 using ParadisePromotions.Data;
 using Microsoft.EntityFrameworkCore;
+using ParadisePromotions.Core.Interfaces.ICodes;
+using ParadisePromotions.Core.Repositories.Codes;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,8 +30,20 @@ builder.Services.AddScoped<IInventoryRepository, InventoryRepository>();
 builder.Services.AddScoped<IInventoryService, InventoryService>();
 builder.Services.AddScoped<IQryBlankSalePrintGreenSheetMainRepository, QryBlankSalePrintGreenSheetMainRepository>();
 builder.Services.AddScoped<IQryBlankSalePrintGreenSheetMainService, QryBlankSalePrintGreenSheetMainService>();
+// Setup Code 
+builder.Services.AddScoped<IZipRepository, ZipRepository>();
+builder.Services.AddScoped<ISaleTypeRepository, SaleTypeRepository>();
+builder.Services.AddScoped<IProductColorRepository, ProductColorRepository>();
+builder.Services.AddScoped<IPrintLocationRepository, PrintLocationRepository>();
+builder.Services.AddScoped<IPaymentMethodRepository, PaymentMethodRepository>();
+builder.Services.AddScoped<ICyclesRepository, CyclesRepository>();
+builder.Services.AddScoped<IDispositionRepository, DispositionRepository>();
+builder.Services.AddScoped<IReturnTypeRepository, ReturnTypeRepository>();
+builder.Services.AddScoped<ISetupCodesService, SetupCodesService>();
+
+
+
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
