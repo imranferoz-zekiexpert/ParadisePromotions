@@ -85,7 +85,20 @@ namespace ParadisePromotions.Core.Services
                 return false;
             }
             // Perform the update in the database
-            _unitOfWork.Users.Update(user);
+            // Update the properties of the existing user
+            existingUser.StaffID = user.StaffID;
+            existingUser.Name = user.Name;
+            existingUser.SSN = user.SSN;
+            existingUser.Password = user.Password;
+            existingUser.Hire_date = user.Hire_date;
+            existingUser.Class = user.Class;
+            existingUser.isAdmin = user.isAdmin;
+            existingUser.IsVerifier = user.IsVerifier;
+            existingUser.IsActiveReloader = user.IsActiveReloader;
+            existingUser.Active = user.Active;
+
+            // Perform the update in the database
+            _unitOfWork.Users.Update(existingUser);
 
             // Save the changes
             var result = _unitOfWork.Save();
