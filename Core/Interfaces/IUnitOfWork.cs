@@ -15,11 +15,14 @@ namespace ParadisePromotions.Core.Interfaces
         IZipRepository Zip { get; }
         ISaleTypeRepository SaleType { get; }
         IProductColorRepository ProductColor { get; }
+        IColorsRepository Colors { get; }
         IPrintLocationRepository PrintLocation { get; }
         IPaymentMethodRepository PaymentMethod { get; }
         ICyclesRepository Cycles { get; }
         IDispositionRepository Disposition { get; }
         IReturnTypeRepository ReturnType { get; }
+
+        ILevelsRepository Levels { get; }
         int Save();
     }
 }

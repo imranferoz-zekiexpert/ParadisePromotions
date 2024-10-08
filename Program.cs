@@ -34,13 +34,14 @@ builder.Services.AddScoped<IQryBlankSalePrintGreenSheetMainService, QryBlankSale
 builder.Services.AddScoped<IZipRepository, ZipRepository>();
 builder.Services.AddScoped<ISaleTypeRepository, SaleTypeRepository>();
 builder.Services.AddScoped<IProductColorRepository, ProductColorRepository>();
+builder.Services.AddScoped<IColorsRepository, ColorsRepository>();
 builder.Services.AddScoped<IPrintLocationRepository, PrintLocationRepository>();
 builder.Services.AddScoped<IPaymentMethodRepository, PaymentMethodRepository>();
 builder.Services.AddScoped<ICyclesRepository, CyclesRepository>();
 builder.Services.AddScoped<IDispositionRepository, DispositionRepository>();
 builder.Services.AddScoped<IReturnTypeRepository, ReturnTypeRepository>();
+builder.Services.AddScoped<ILevelsRepository, LevelsRepository>();
 builder.Services.AddScoped<ISetupCodesService, SetupCodesService>();
-
 
 
 builder.Services.AddControllers();

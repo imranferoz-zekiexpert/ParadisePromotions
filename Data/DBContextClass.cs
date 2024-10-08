@@ -22,10 +22,12 @@ namespace ParadisePromotions.Data
     DbSet<SaleType> SaleType { get; set; } = null!;
     DbSet<ReturnType> ReturnType { get; set; } = null!;
     DbSet<ProductColor> ProductColor { get; set; } = null!;
+    DbSet<Colors> Colors { get; set; } = null!;
     DbSet<PrintLocation> PrintLocation { get; set; } = null!;
     DbSet<PaymentMethod> PaymentMethod { get; set; } = null!;
     DbSet<Cycles> Cycles { get; set; } = null!;
     DbSet<Disposition> Disposition { get; set; } = null!;
+    DbSet<Levels> Levels { get; set; } = null!;
     }
 
 }

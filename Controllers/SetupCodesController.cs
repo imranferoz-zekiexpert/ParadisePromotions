@@ -20,6 +20,7 @@ namespace ParadisePromotions.Controllers
 
         // Zip CRUD operations
 
+
         [HttpGet]
         [Route("Zip")]
         public async Task<IActionResult> GetZip()
@@ -322,7 +323,7 @@ namespace ParadisePromotions.Controllers
                 try
                 {
                     await _setupCodesService.CreateProductColor(model);
-                    return Ok(new { message = "ProductColor created successfully" });
+                    return Ok(new { message = "Product Color created successfully" });
                 }
                 catch (Exception ex)
                 {
@@ -386,6 +387,100 @@ namespace ParadisePromotions.Controllers
 
             // If deletion was successful
             return Ok(new { message = "ProductColor deleted successfully" });
+        }
+
+
+        // Colors CRUD operations
+
+        [HttpGet]
+        [Route("Colors")]
+        public async Task<IActionResult> GetColors()
+        {
+            try
+            {
+                var colors = await _setupCodesService.GetAllColors();
+                return Ok(colors);
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest();
+            }
+        }
+
+        [HttpPost]
+        [Route("AddColors")]
+        public async Task<IActionResult> CreateColors([FromBody] Colors model)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    await _setupCodesService.CreateColors(model);
+                    return Ok(new { message = "Colors created successfully" });
+                }
+                catch (Exception ex)
+                {
+                    return StatusCode(500, "Internal server error");
+                }
+            }
+
+            return BadRequest(ModelState);
+        }
+
+
+        [HttpGet("Colors/{id}")]
+        public async Task<IActionResult> GetColorsById(int id)
+        {
+            // Call the service method to get the color by id
+            var color = await _setupCodesService.GetColorsById(id);
+
+            // Check if the color is null (i.e., color not found or invalid id)
+            if (color == null)
+            {
+                return NotFound(new { message = "Colors not found" });
+            }
+
+            // Return the found color
+            return Ok(color);
+        }
+
+        [HttpPut("UpdateColors")]
+        public async Task<IActionResult> UpdateColors([FromBody] Colors color)
+        {
+            // Validate the incoming color object
+            if (color == null || color.ID <= 0)
+            {
+                return BadRequest(new { message = "Invalid color data" });
+            }
+
+            // Call the service to update the color
+            var isUpdated = await _setupCodesService.UpdateColors(color);
+
+            // Check if the update was successful
+            if (!isUpdated)
+            {
+                return NotFound(new { message = "Colors not found or update failed" });
+            }
+
+            // Return a success response
+            return Ok(new { message = "Colors updated successfully" });
+        }
+
+        [HttpDelete("DeleteColors/{id}")]
+        public async Task<IActionResult> DeleteColors(int id)
+        {
+            // Call the service method to delete the color
+            var isDeleted = await _setupCodesService.DeleteColors(id);
+
+            // If deletion was unsuccessful, return a not found or bad request response
+            if (!isDeleted)
+            {
+                return NotFound(new { message = "Colors not found or deletion failed." });
+            }
+
+            // If deletion was successful
+            return Ok(new { message = "Colors deleted successfully" });
         }
 
         // PrintLocation CRUD operations
@@ -760,5 +855,100 @@ namespace ParadisePromotions.Controllers
             // If deletion was successful
             return Ok(new { message = "Disposition deleted successfully" });
         }
+
+        // Levels CRUD operations
+
+        [HttpGet]
+        [Route("Levels")]
+        public async Task<IActionResult> GetLevels()
+        {
+            try
+            {
+                var products = await _setupCodesService.GetAllLevels();
+                return Ok(products);
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest();
+            }
+        }
+
+        [HttpPost]
+        [Route("AddLevels")]
+        public async Task<IActionResult> CreateLevels([FromBody] Levels model)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    await _setupCodesService.CreateLevels(model);
+                    return Ok(new { message = "Levels created successfully" });
+                }
+                catch (Exception ex)
+                {
+                    return StatusCode(500, "Internal server error");
+                }
+            }
+
+            return BadRequest(ModelState);
+        }
+
+
+        [HttpGet("Levels/{id}")]
+        public async Task<IActionResult> GetLevelsById(int id)
+        {
+            // Call the service method to get the product by id
+            var product = await _setupCodesService.GetLevelsById(id);
+
+            // Check if the product is null (i.e., product not found or invalid id)
+            if (product == null)
+            {
+                return NotFound(new { message = "Levels not found" });
+            }
+
+            // Return the found product
+            return Ok(product);
+        }
+
+        [HttpPut("UpdateLevels")]
+        public async Task<IActionResult> UpdateLevels([FromBody] Levels product)
+        {
+            // Validate the incoming product object
+            if (product == null || product.ID <= 0)
+            {
+                return BadRequest(new { message = "Invalid product data" });
+            }
+
+            // Call the service to update the product
+            var isUpdated = await _setupCodesService.UpdateLevels(product);
+
+            // Check if the update was successful
+            if (!isUpdated)
+            {
+                return NotFound(new { message = "Levels not found or update failed" });
+            }
+
+            // Return a success response
+            return Ok(new { message = "Levels updated successfully" });
+        }
+
+        [HttpDelete("DeleteLevels/{id}")]
+        public async Task<IActionResult> DeleteLevels(int id)
+        {
+            // Call the service method to delete the product
+            var isDeleted = await _setupCodesService.DeleteLevels(id);
+
+            // If deletion was unsuccessful, return a not found or bad request response
+            if (!isDeleted)
+            {
+                return NotFound(new { message = "Levels not found or deletion failed." });
+            }
+
+            // If deletion was successful
+            return Ok(new { message = "Levels deleted successfully" });
+        }
+
+
     }
 }

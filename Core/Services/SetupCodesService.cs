@@ -332,6 +332,88 @@ namespace ParadisePromotions.Core.Services
             return result > 0;
         }
 
+
+        // Colors CRUD operations
+
+        public async Task<bool> CreateColors(Colors color)
+        {
+            if (color != null)
+            {
+
+                await _unitOfWork.Colors.Insert(color);
+                var result = _unitOfWork.Save();
+
+                if (result > 0)
+                    return true;
+                else
+                    return false;
+            }
+            return false;
+        }
+
+        public async Task<bool> DeleteColors(int id)
+        {
+            if (id > 0)
+            {
+                var color = await _unitOfWork.Colors.GetById(id);
+                if (color != null)
+                {
+                    _unitOfWork.Colors.Delete(color);
+                    var result = _unitOfWork.Save();
+
+                    if (result > 0)
+                        return true;
+                    else
+                        return false;
+                }
+            }
+            return false;
+        }
+
+        public async Task<IEnumerable<Colors>> GetAllColors()
+        {
+            var colors = await _unitOfWork.Colors.GetAll();
+            return colors; ;
+        }
+
+        public async Task<Colors> GetColorsById(int id)
+        {
+            if (id > 0)
+            {
+                var color = await _unitOfWork.Colors.GetById(id);
+                if (color != null)
+                {
+                    return color;
+                }
+            }
+            return null;
+        }
+
+        public async Task<bool> UpdateColors(Colors color)
+        {
+            if (color == null)
+            {
+                return false;
+            }
+
+            var existingColor = await _unitOfWork.Colors.GetById(color.ID);
+            if (existingColor == null)
+            {
+                return false;
+            }
+
+            // Update only the necessary properties of the existing color
+            existingColor.Color = color.Color;
+
+            // Perform the update in the database
+            _unitOfWork.Colors.Update(existingColor);
+
+            // Save the changes
+            var result =  _unitOfWork.Save(); // Assuming SaveAsync is an async method
+            return result > 0;
+        }
+
+
         // PrintLocation CRUD operations
         public async Task<bool> CreatePrintLocation(PrintLocation printLocation)
         {
@@ -645,7 +727,86 @@ namespace ParadisePromotions.Core.Services
             return result > 0;
         }
 
+        // Disposition CRUD operations
+        public async Task<bool> CreateLevels(Levels level)
+        {
+            if (level != null)
+            {
 
+                await _unitOfWork.Levels.Insert(level);
+                var result = _unitOfWork.Save();
+
+                if (result > 0)
+                    return true;
+                else
+                    return false;
+            }
+            return false;
+        }
+
+        public async Task<bool> DeleteLevels(int id)
+        {
+            if (id > 0)
+            {
+                var levels = await _unitOfWork.Levels.GetById(id);
+                if (levels != null)
+                {
+                    _unitOfWork.Levels.Delete(levels);
+                    var result = _unitOfWork.Save();
+
+                    if (result > 0)
+                        return true;
+                    else
+                        return false;
+                }
+            }
+            return false;
+        }
+
+        public async Task<IEnumerable<Levels>> GetAllLevels()
+        {
+            var levels = await _unitOfWork.Levels.GetAll();
+            return levels; ;
+        }
+
+        public async Task<Levels> GetLevelsById(int id)
+        {
+            if (id > 0)
+            {
+                var level = await _unitOfWork.Levels.GetById(id);
+                if (level != null)
+                {
+                    return level;
+                }
+            }
+            return null;
+        }
+
+        public async Task<bool> UpdateLevels(Levels level)
+        {
+            if (level == null)
+            {
+                return false;
+            }
+
+            var existingLevel = await _unitOfWork.Levels.GetById(level.ID);
+            if (existingLevel == null)
+            {
+                return false;
+            }
+
+            // Update only the necessary properties of the existing level
+            existingLevel.Level = level.Level;
+            existingLevel.Over = level.Over;
+            existingLevel.Percent = level.Percent;
+
+            // Perform the update in the database
+            _unitOfWork.Levels.Update(existingLevel);
+
+            // Save the changes
+            var result = _unitOfWork.Save(); // Assuming SaveAsync is an async method
+            return result > 0;
+        }
 
     }
 }

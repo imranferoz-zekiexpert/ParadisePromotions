@@ -20,11 +20,13 @@ namespace ParadisePromotions.Core.Repositories
         public IZipRepository Zip { get; }
         public ISaleTypeRepository SaleType { get; }
         public IProductColorRepository ProductColor { get; }
+        public IColorsRepository Colors { get; }
         public IPrintLocationRepository PrintLocation { get; }
         public IPaymentMethodRepository PaymentMethod { get; }
         public ICyclesRepository Cycles { get; }
         public IDispositionRepository Disposition { get; }
         public IReturnTypeRepository ReturnType { get; }
+        public ILevelsRepository Levels { get; }
 
         public UnitOfWork(
             DBContextClass dbContext,
@@ -39,11 +41,13 @@ namespace ParadisePromotions.Core.Repositories
             IZipRepository zipRepository,
             ISaleTypeRepository saleTypeRepository,
             IProductColorRepository productColorRepository,
+            IColorsRepository colorsRepository,
             IPrintLocationRepository printLocationRepository,
             IPaymentMethodRepository paymentMethodRepository,
             ICyclesRepository cyclesRepository,
             IDispositionRepository dispositionRepository,
-            IReturnTypeRepository returnTypeRepository
+            IReturnTypeRepository returnTypeRepository,
+            ILevelsRepository levelsRepository
             )
         {
             _dbContext = dbContext;
@@ -58,11 +62,13 @@ namespace ParadisePromotions.Core.Repositories
             Zip = zipRepository;
             SaleType = saleTypeRepository;
             ProductColor = productColorRepository;
+            Colors = colorsRepository;
             PrintLocation = printLocationRepository;
             PaymentMethod = paymentMethodRepository;
             Cycles = cyclesRepository;
             Disposition = dispositionRepository;
             ReturnType = returnTypeRepository;
+            Levels = levelsRepository;
         }
 
         public int Save()

@@ -33,6 +33,13 @@ namespace ParadisePromotions.Core.Interfaces.IServices
          Task<bool> UpdateProductColor(ProductColor productColor);
          Task<bool> DeleteProductColor(int id);
 
+        // Colors CRUD operations
+        Task<IEnumerable<Colors>> GetAllColors();
+        Task<Colors> GetColorsById(int id);
+        Task<bool> CreateColors(Colors colors);
+        Task<bool> UpdateColors(Colors colors);
+        Task<bool> DeleteColors(int id);
+
         // PrintLocation CRUD operations
         Task<IEnumerable<PrintLocation>> GetAllPrintLocation();
         Task<PrintLocation> GetPrintLocationById(int id);
@@ -60,5 +67,13 @@ namespace ParadisePromotions.Core.Interfaces.IServices
          Task<bool> CreateDisposition(Disposition disposition);
          Task<bool> UpdateDisposition(Disposition disposition);
          Task<bool> DeleteDisposition(int id);
+
+
+        // Levels CRUD operations
+        Task<IEnumerable<Levels>> GetAllLevels();
+        Task<Levels> GetLevelsById(int id);
+        Task<bool> CreateLevels(Levels disposition);
+        Task<bool> UpdateLevels(Levels disposition);
+        Task<bool> DeleteLevels(int id);
     }
 }
