@@ -27,6 +27,7 @@ namespace ParadisePromotions.Core.Repositories
         public IDispositionRepository Disposition { get; }
         public IReturnTypeRepository ReturnType { get; }
         public ILevelsRepository Levels { get; }
+        public INotesHistoryRepository NotesHistory { get; }
 
         public UnitOfWork(
             DBContextClass dbContext,
@@ -47,7 +48,8 @@ namespace ParadisePromotions.Core.Repositories
             ICyclesRepository cyclesRepository,
             IDispositionRepository dispositionRepository,
             IReturnTypeRepository returnTypeRepository,
-            ILevelsRepository levelsRepository
+            ILevelsRepository levelsRepository,
+            INotesHistoryRepository notesHistoryRepository
             )
         {
             _dbContext = dbContext;
@@ -69,6 +71,7 @@ namespace ParadisePromotions.Core.Repositories
             Disposition = dispositionRepository;
             ReturnType = returnTypeRepository;
             Levels = levelsRepository;
+            NotesHistory = notesHistoryRepository;
         }
 
         public int Save()

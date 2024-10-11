@@ -21,8 +21,9 @@ namespace ParadisePromotions.Core.Interfaces
         ICyclesRepository Cycles { get; }
         IDispositionRepository Disposition { get; }
         IReturnTypeRepository ReturnType { get; }
-
         ILevelsRepository Levels { get; }
+        INotesHistoryRepository NotesHistory { get; }
+
         int Save();
     }
 }
