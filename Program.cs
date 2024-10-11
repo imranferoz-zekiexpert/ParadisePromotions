@@ -30,6 +30,14 @@ builder.Services.AddScoped<IInventoryRepository, InventoryRepository>();
 builder.Services.AddScoped<IInventoryService, InventoryService>();
 builder.Services.AddScoped<INotesHistoryRepository, NotesHistoryRepository>();
 builder.Services.AddScoped<INotesHistoryService, NotesHistoryService>();
+builder.Services.AddScoped<IParsRepository, ParsRepository>();
+builder.Services.AddScoped<IParsService, ParsService>();
+builder.Services.AddScoped<IBonusRepository, BonusRepository>();
+builder.Services.AddScoped<IBonusService, BonusService>();
+builder.Services.AddScoped<ITimeZonesRepository, TimeZonesRepository>();
+builder.Services.AddScoped<ITimeZonesService, TimeZonesService>();
+builder.Services.AddScoped<ITouchLogRepository, TouchLogRepository>();
+builder.Services.AddScoped<ITouchLogService, TouchLogService>();
 builder.Services.AddScoped<IQryBlankSalePrintGreenSheetMainRepository, QryBlankSalePrintGreenSheetMainRepository>();
 builder.Services.AddScoped<IQryBlankSalePrintGreenSheetMainService, QryBlankSalePrintGreenSheetMainService>();
 // Setup Code 

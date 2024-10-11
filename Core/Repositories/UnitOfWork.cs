@@ -28,6 +28,10 @@ namespace ParadisePromotions.Core.Repositories
         public IReturnTypeRepository ReturnType { get; }
         public ILevelsRepository Levels { get; }
         public INotesHistoryRepository NotesHistory { get; }
+        public IParsRepository Pars { get; }
+        public IBonusRepository Bonus { get; }
+        public ITimeZonesRepository TimeZones { get; }
+        public ITouchLogRepository TouchLog { get; }
 
         public UnitOfWork(
             DBContextClass dbContext,
@@ -49,7 +53,11 @@ namespace ParadisePromotions.Core.Repositories
             IDispositionRepository dispositionRepository,
             IReturnTypeRepository returnTypeRepository,
             ILevelsRepository levelsRepository,
-            INotesHistoryRepository notesHistoryRepository
+            INotesHistoryRepository notesHistoryRepository,
+            IParsRepository parsRepository,
+            IBonusRepository bonusRepository,
+            ITimeZonesRepository timeZonesRepository,
+            ITouchLogRepository touchLogRepository
             )
         {
             _dbContext = dbContext;
@@ -72,6 +80,10 @@ namespace ParadisePromotions.Core.Repositories
             ReturnType = returnTypeRepository;
             Levels = levelsRepository;
             NotesHistory = notesHistoryRepository;
+            Pars = parsRepository;
+            Bonus = bonusRepository;
+            TimeZones = timeZonesRepository;
+            TouchLog = touchLogRepository;
         }
 
         public int Save()

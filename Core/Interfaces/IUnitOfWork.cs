@@ -23,6 +23,10 @@ namespace ParadisePromotions.Core.Interfaces
         IReturnTypeRepository ReturnType { get; }
         ILevelsRepository Levels { get; }
         INotesHistoryRepository NotesHistory { get; }
+        IParsRepository Pars { get; }
+        IBonusRepository Bonus { get; }
+        ITimeZonesRepository TimeZones { get; }
+        ITouchLogRepository TouchLog { get; }
 
         int Save();
     }
