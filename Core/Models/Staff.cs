@@ -18,7 +18,7 @@
 
     public class LoginRequestModel
     {
-        public string Name { get; set; }
+        public int StaffID { get; set; }
         public string Password { get; set; }
     }
 

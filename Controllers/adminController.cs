@@ -58,7 +58,7 @@ namespace ParadisePromotions.Controllers
            var user = await _userService.Login(User);
             if (user == null)
             {
-                return BadRequest(new { message = "UserName or Password is incorrect" });
+                return BadRequest(new { message = "UserId or Password is incorrect" });
             }
             return Ok(user);
         }

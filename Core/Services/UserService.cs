@@ -106,44 +106,43 @@ namespace ParadisePromotions.Core.Services
         }
 
 
-        public async Task<LoginResponceModel> Login([FromBody] LoginRequestModel User)
+        public async Task<LoginResponceModel> Login([FromBody] LoginRequestModel loginRequest)
         {
-            if (string.IsNullOrEmpty(User.Name) || string.IsNullOrEmpty(User.Password))
+            // Validate input
+            if (loginRequest.StaffID < 0 || string.IsNullOrEmpty(loginRequest.Password))
             {
-                return null; // Username or password is empty
+                return null; // Invalid staff ID or password
             }
 
-            // Find user by username (assuming unique usernames)
+            // Retrieve all users (ideally, query the user directly rather than loading all users)
             var users = await _unitOfWork.Users.GetAll();
-            var user = users.FirstOrDefault(u => u.Name == User.Name && u.Password == User.Password);
-            if (user == null)
+            var user = users.FirstOrDefault(u => u.StaffID == loginRequest.StaffID);
+
+            if (user == null || !VerifyPasswordHash(loginRequest.Password, user.Password))
             {
-                return null; // User with the given username does not exist
+                return null; // Invalid staff ID or password
             }
 
-            // Check if the provided password matches the stored password hash
-            if (!VerifyPasswordHash(User.Password, user.Password))
-            {
-                return null; // Password does not match
-            }
-
+            // Create JWT token
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(_configuration["Jwt:Key"]);
+            var key = Encoding.ASCII.GetBytes(_configuration["Jwt:Key"]); // Ensure the key is set in your config
             var tokenDescriptor = new SecurityTokenDescriptor
             {
-                Subject = new ClaimsIdentity(new Claim[]
+                Subject = new ClaimsIdentity(new[]
                 {
-                   new Claim(ClaimTypes.Name, User.Name)
-                }),
+            new Claim(ClaimTypes.NameIdentifier, user.StaffID.ToString()),
+            new Claim(ClaimTypes.Name, user.Name) // Assuming user.Name exists
+        }),
                 Expires = DateTime.UtcNow.AddMinutes(30),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);
             string userToken = tokenHandler.WriteToken(token);
 
+            // Return response with user name and token
             return new LoginResponceModel
             {
-                Name = User.Name,
+                Name = user.Name,
                 token = userToken
             };
         }
