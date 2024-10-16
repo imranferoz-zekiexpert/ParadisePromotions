@@ -6,7 +6,7 @@ using ParadisePromotions.Core.Models;
 
 namespace ParadisePromotions.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]") , Authorize]
     [ApiController]
     public class AdminController : ControllerBase
     {

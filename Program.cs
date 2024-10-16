@@ -6,12 +6,19 @@ using ParadisePromotions.Data;
 using Microsoft.EntityFrameworkCore;
 using ParadisePromotions.Core.Interfaces.ICodes;
 using ParadisePromotions.Core.Repositories.Codes;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
+// Load environment variables from the .env file
+DotNetEnv.Env.Load();
 
 // Add services to the container.
+var connectionString = Environment.GetEnvironmentVariable("ParadisePromotionsDb");
 builder.Services.AddDbContext<DBContextClass>(options =>
-options.UseSqlServer(builder.Configuration.GetConnectionString("ParadisePromotionsDb")));
+options.UseSqlServer(connectionString));
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
@@ -56,9 +63,61 @@ builder.Services.AddScoped<ILevelsRepository, LevelsRepository>();
 builder.Services.AddScoped<ISetupCodesService, SetupCodesService>();
 
 
+//Middleware 
+var jwtKey = Environment.GetEnvironmentVariable("Key");
+builder.Services.AddAuthentication(cfg => {
+    cfg.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    cfg.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    cfg.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(x => {
+    x.RequireHttpsMetadata = false;
+    x.SaveToken = false;
+    x.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(
+            Encoding.UTF8
+            .GetBytes(jwtKey)
+        ),
+        ValidateIssuer = false,
+        ValidateAudience = false,
+        ClockSkew = TimeSpan.Zero
+    };
+});
+
+
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+
+builder.Services.AddSwaggerGen(option =>
+{
+    option.SwaggerDoc("v1", new OpenApiInfo { Title = "Paradise Promotions API", Version = "v1" });
+    option.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        In = ParameterLocation.Header,
+        Description = "Please enter a valid token",
+        Name = "Authorization",
+        Type = SecuritySchemeType.Http,
+        BearerFormat = "JWT",
+        Scheme = "Bearer"
+    });
+    option.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type=ReferenceType.SecurityScheme,
+                    Id="Bearer"
+                }
+            },
+            new string[]{}
+        }
+    });
+});
 
 var app = builder.Build();
 
@@ -88,7 +147,7 @@ app.UseCors(builder => builder
  .AllowAnyHeader());
 
 app.UseHttpsRedirection();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

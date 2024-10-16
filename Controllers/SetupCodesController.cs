@@ -8,7 +8,7 @@ using ParadisePromotions.Core.Services;
 
 namespace ParadisePromotions.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]") , Authorize]
     [ApiController]
     public class SetupCodesController : ControllerBase
     {
