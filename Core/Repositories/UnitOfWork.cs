@@ -32,6 +32,7 @@ namespace ParadisePromotions.Core.Repositories
         public IBonusRepository Bonus { get; }
         public ITimeZonesRepository TimeZones { get; }
         public ITouchLogRepository TouchLog { get; }
+        public IChargeBackRepository ChargeBack { get; }
 
         public UnitOfWork(
             DBContextClass dbContext,
@@ -57,7 +58,8 @@ namespace ParadisePromotions.Core.Repositories
             IParsRepository parsRepository,
             IBonusRepository bonusRepository,
             ITimeZonesRepository timeZonesRepository,
-            ITouchLogRepository touchLogRepository
+            ITouchLogRepository touchLogRepository,
+            IChargeBackRepository chargeBackRepository
             )
         {
             _dbContext = dbContext;
@@ -84,6 +86,7 @@ namespace ParadisePromotions.Core.Repositories
             Bonus = bonusRepository;
             TimeZones = timeZonesRepository;
             TouchLog = touchLogRepository;
+            ChargeBack = chargeBackRepository;
         }
 
         public int Save()

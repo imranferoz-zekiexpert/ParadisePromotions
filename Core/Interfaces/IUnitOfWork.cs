@@ -27,7 +27,7 @@ namespace ParadisePromotions.Core.Interfaces
         IBonusRepository Bonus { get; }
         ITimeZonesRepository TimeZones { get; }
         ITouchLogRepository TouchLog { get; }
-
+        IChargeBackRepository ChargeBack { get; }
         int Save();
     }
 }

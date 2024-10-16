@@ -33,6 +33,7 @@ namespace ParadisePromotions.Data
     DbSet<Cycles> Cycles { get; set; } = null!;
     DbSet<Disposition> Disposition { get; set; } = null!;
     DbSet<Levels> Levels { get; set; } = null!;
+    DbSet<ChargeBack> ChargeBack { get; set; } = null!;
     }
 
 }

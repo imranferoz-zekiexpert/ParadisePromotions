@@ -38,6 +38,8 @@ builder.Services.AddScoped<ITimeZonesRepository, TimeZonesRepository>();
 builder.Services.AddScoped<ITimeZonesService, TimeZonesService>();
 builder.Services.AddScoped<ITouchLogRepository, TouchLogRepository>();
 builder.Services.AddScoped<ITouchLogService, TouchLogService>();
+builder.Services.AddScoped<IChargeBackRepository, ChargeBackRepository>();
+builder.Services.AddScoped<IChargeBackService, ChargeBackService>();
 builder.Services.AddScoped<IQryBlankSalePrintGreenSheetMainRepository, QryBlankSalePrintGreenSheetMainRepository>();
 builder.Services.AddScoped<IQryBlankSalePrintGreenSheetMainService, QryBlankSalePrintGreenSheetMainService>();
 // Setup Code 
