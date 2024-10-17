@@ -126,7 +126,7 @@ namespace ParadisePromotions.Core.Services
                 }
 
                 // Create JWT token
-                var jwtKey = Environment.GetEnvironmentVariable("Key");
+                var jwtKey = _configuration["Jwt:JWT_KEY"];
                 var tokenHandler = new JwtSecurityTokenHandler();
                 var key = Encoding.ASCII.GetBytes(jwtKey); // Ensure the key is set in your config
                 var tokenDescriptor = new SecurityTokenDescriptor

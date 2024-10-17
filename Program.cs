@@ -16,7 +16,7 @@ var builder = WebApplication.CreateBuilder(args);
 DotNetEnv.Env.Load();
 
 // Add services to the container.
-var connectionString = Environment.GetEnvironmentVariable("ParadisePromotionsDb");
+var connectionString = builder.Configuration.GetConnectionString("PARADISE_PROMOTIONS_DB");
 builder.Services.AddDbContext<DBContextClass>(options =>
 options.UseSqlServer(connectionString));
 
@@ -64,7 +64,7 @@ builder.Services.AddScoped<ISetupCodesService, SetupCodesService>();
 
 
 //Middleware 
-var jwtKey = Environment.GetEnvironmentVariable("Key");
+var jwtKey = builder.Configuration["Jwt:JWT_KEY"];
 builder.Services.AddAuthentication(cfg => {
     cfg.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
     cfg.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
