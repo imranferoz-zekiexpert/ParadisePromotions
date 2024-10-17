@@ -6,7 +6,7 @@ namespace ParadisePromotions.Core.Models.Codes
     [Table("Product_Colors")]
     public class ProductColor
     {
-        public int ID { get; set; }
-        public string Color { get; set; }
+        public int? ID { get; set; }
+        public string? Color { get; set; }
     }
 }

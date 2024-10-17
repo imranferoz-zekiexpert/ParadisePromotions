@@ -6,7 +6,7 @@ namespace ParadisePromotions.Core.Models.Codes
     [Table("Sale_Types")]
     public class SaleType
     {
-        public int ID { get; set; }
-        public string Sale_Type { get; set; }
+        public int? ID { get; set; }
+        public string? Sale_Type { get; set; }
     }
 }

@@ -2,9 +2,9 @@
 {
     public class Levels
     {
-        public int ID { get; set; }
+        public int? ID { get; set; }
 
-        public string Level { get; set; }
+        public string? Level { get; set; }
 
         public int? Over { get; set; }
 

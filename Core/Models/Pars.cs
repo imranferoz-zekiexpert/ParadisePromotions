@@ -2,9 +2,9 @@
 {
     public class Pars
     {
-        public int ID { get; set; }
+        public int? ID { get; set; }
 
-        public string Product { get; set; }
+        public string? Product { get; set; }
 
         public int? Quantity { get; set; }
 
@@ -16,5 +16,6 @@
 
         public double? NonCODShipping { get; set; }
     }
+
 
 }
