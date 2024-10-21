@@ -35,6 +35,7 @@ namespace ParadisePromotions.Core.Repositories
         public ITouchLogRepository TouchLog { get; }
         public IChargeBackRepository ChargeBack { get; }
         public IBuyingHistoryRepository BuyingHistory { get; }
+        public ILastDispositionRepository LastDisposition { get; }
 
 
         public UnitOfWork(
@@ -63,7 +64,8 @@ namespace ParadisePromotions.Core.Repositories
             ITimeZonesRepository timeZonesRepository,
             ITouchLogRepository touchLogRepository,
             IChargeBackRepository chargeBackRepository,
-            IBuyingHistoryRepository buyingHistoryRepository
+            IBuyingHistoryRepository buyingHistoryRepository,
+            ILastDispositionRepository lastDispositionRepository
             )
         {
             _dbContext = dbContext;
@@ -92,6 +94,7 @@ namespace ParadisePromotions.Core.Repositories
             TouchLog = touchLogRepository;
             ChargeBack = chargeBackRepository;
             BuyingHistory = buyingHistoryRepository;
+            LastDisposition = lastDispositionRepository;
         }
 
         public int Save()
