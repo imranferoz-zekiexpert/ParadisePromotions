@@ -39,6 +39,7 @@ namespace ParadisePromotions.Data
     // Reports
     DbSet<BuyingHistory> BuyingHistory { get; set; } = null!;
     DbSet<LastDisposition> LastDisposition { get; set; } = null!;
+    DbSet<NextCallBack> NextCallBack { get; set; } = null!;
     }
 
 }

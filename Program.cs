@@ -71,6 +71,8 @@ builder.Services.AddScoped<IBuyingHistoryRepository, BuyingHistoryRepository>();
 builder.Services.AddScoped<IBuyingHistoryService, BuyingHistoryService>();
 builder.Services.AddScoped<ILastDispositionRepository, LastDispositionRepository>();
 builder.Services.AddScoped<ILastDispositionService, LastDispositionService>();
+builder.Services.AddScoped<INextCallBackRepository, NextCallBackRepository>();
+builder.Services.AddScoped<INextCallBackService, NextCallBackService>();
 
 //Middleware 
 var jwtKey = builder.Configuration["Jwt:JWT_KEY"];
