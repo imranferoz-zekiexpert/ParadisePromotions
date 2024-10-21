@@ -1,4 +1,5 @@
 ﻿using ParadisePromotions.Core.Interfaces.ICodes;
+using ParadisePromotions.Core.Interfaces.IReportsRepositories;
 
 namespace ParadisePromotions.Core.Interfaces
 {
@@ -28,6 +29,9 @@ namespace ParadisePromotions.Core.Interfaces
         ITimeZonesRepository TimeZones { get; }
         ITouchLogRepository TouchLog { get; }
         IChargeBackRepository ChargeBack { get; }
+
+        // Reports 
+        IBuyingHistoryRepository BuyingHistory { get; }
         int Save();
     }
 }

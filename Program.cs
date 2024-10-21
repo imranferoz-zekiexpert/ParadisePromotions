@@ -10,6 +10,10 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.OpenApi.Models;
+using ParadisePromotions.Core.Interfaces.IReportsRepositories;
+using ParadisePromotions.Core.Interfaces.IServices.IReportsServices;
+using ParadisePromotions.Core.Repositories.ReportsRepositories;
+using ParadisePromotions.Core.Services.ReportsServices;
 
 var builder = WebApplication.CreateBuilder(args);
 // Load environment variables from the .env file
@@ -62,6 +66,9 @@ builder.Services.AddScoped<IReturnTypeRepository, ReturnTypeRepository>();
 builder.Services.AddScoped<ILevelsRepository, LevelsRepository>();
 builder.Services.AddScoped<ISetupCodesService, SetupCodesService>();
 
+// Reports
+builder.Services.AddScoped<IBuyingHistoryRepository, BuyingHistoryRepository>();
+builder.Services.AddScoped<IBuyingHistoryService, BuyingHistoryService>();
 
 //Middleware 
 var jwtKey = builder.Configuration["Jwt:JWT_KEY"];

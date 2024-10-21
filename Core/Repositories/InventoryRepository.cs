@@ -1,4 +1,5 @@
 ﻿using ParadisePromotions.Core.Interfaces;
+using ParadisePromotions.Core.Interfaces.IReportsRepositories;
 using ParadisePromotions.Core.Models;
 using ParadisePromotions.Data;
 
