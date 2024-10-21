@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using ParadisePromotions.Core.Models;
 using ParadisePromotions.Core.Models.Codes;
+using ParadisePromotions.Core.Models.ReportsModels;
 
 namespace ParadisePromotions.Data
 {
@@ -34,6 +35,9 @@ namespace ParadisePromotions.Data
     DbSet<Disposition> Disposition { get; set; } = null!;
     DbSet<Levels> Levels { get; set; } = null!;
     DbSet<ChargeBack> ChargeBack { get; set; } = null!;
+
+        // Reports
+        DbSet<BuyingHistory> BuyingHistory { get; set; } = null!;
     }
 
 }

@@ -1,5 +1,6 @@
 ﻿using ParadisePromotions.Core.Interfaces;
 using ParadisePromotions.Core.Interfaces.ICodes;
+using ParadisePromotions.Core.Interfaces.IReportsRepositories;
 using ParadisePromotions.Core.Repositories.Codes;
 using ParadisePromotions.Data;
 using System.Threading.Tasks;
@@ -33,6 +34,8 @@ namespace ParadisePromotions.Core.Repositories
         public ITimeZonesRepository TimeZones { get; }
         public ITouchLogRepository TouchLog { get; }
         public IChargeBackRepository ChargeBack { get; }
+        public IBuyingHistoryRepository BuyingHistory { get; }
+
 
         public UnitOfWork(
             DBContextClass dbContext,
@@ -59,7 +62,8 @@ namespace ParadisePromotions.Core.Repositories
             IBonusRepository bonusRepository,
             ITimeZonesRepository timeZonesRepository,
             ITouchLogRepository touchLogRepository,
-            IChargeBackRepository chargeBackRepository
+            IChargeBackRepository chargeBackRepository,
+            IBuyingHistoryRepository buyingHistoryRepository
             )
         {
             _dbContext = dbContext;
@@ -87,6 +91,7 @@ namespace ParadisePromotions.Core.Repositories
             TimeZones = timeZonesRepository;
             TouchLog = touchLogRepository;
             ChargeBack = chargeBackRepository;
+            BuyingHistory = buyingHistoryRepository;
         }
 
         public int Save()

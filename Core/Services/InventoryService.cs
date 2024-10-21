@@ -2,6 +2,7 @@
 using Microsoft.IdentityModel.Tokens;
 using ParadisePromotions.Core.Interfaces;
 using ParadisePromotions.Core.Interfaces.IServices;
+using ParadisePromotions.Core.Interfaces.IServices.IReportsServices;
 using ParadisePromotions.Core.Models;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
