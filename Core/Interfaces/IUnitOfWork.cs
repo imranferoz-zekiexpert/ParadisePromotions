@@ -33,6 +33,7 @@ namespace ParadisePromotions.Core.Interfaces
         // Reports 
         IBuyingHistoryRepository BuyingHistory { get; }
         ILastDispositionRepository LastDisposition { get; }
+        INextCallBackRepository NextCallBack { get; }
         int Save();
     }
 }

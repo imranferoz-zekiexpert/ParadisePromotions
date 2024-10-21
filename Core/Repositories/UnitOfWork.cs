@@ -2,6 +2,7 @@
 using ParadisePromotions.Core.Interfaces.ICodes;
 using ParadisePromotions.Core.Interfaces.IReportsRepositories;
 using ParadisePromotions.Core.Repositories.Codes;
+using ParadisePromotions.Core.Repositories.ReportsRepositories;
 using ParadisePromotions.Data;
 using System.Threading.Tasks;
 
@@ -36,6 +37,7 @@ namespace ParadisePromotions.Core.Repositories
         public IChargeBackRepository ChargeBack { get; }
         public IBuyingHistoryRepository BuyingHistory { get; }
         public ILastDispositionRepository LastDisposition { get; }
+        public INextCallBackRepository NextCallBack { get; }
 
 
         public UnitOfWork(
@@ -65,7 +67,8 @@ namespace ParadisePromotions.Core.Repositories
             ITouchLogRepository touchLogRepository,
             IChargeBackRepository chargeBackRepository,
             IBuyingHistoryRepository buyingHistoryRepository,
-            ILastDispositionRepository lastDispositionRepository
+            ILastDispositionRepository lastDispositionRepository,
+            INextCallBackRepository nextCallBackRepository
             )
         {
             _dbContext = dbContext;
@@ -95,6 +98,7 @@ namespace ParadisePromotions.Core.Repositories
             ChargeBack = chargeBackRepository;
             BuyingHistory = buyingHistoryRepository;
             LastDisposition = lastDispositionRepository;
+            NextCallBack = nextCallBackRepository;
         }
 
         public int Save()
