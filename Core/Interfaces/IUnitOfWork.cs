@@ -32,6 +32,7 @@ namespace ParadisePromotions.Core.Interfaces
 
         // Reports 
         IBuyingHistoryRepository BuyingHistory { get; }
+        ILastDispositionRepository LastDisposition { get; }
         int Save();
     }
 }

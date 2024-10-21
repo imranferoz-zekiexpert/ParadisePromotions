@@ -36,8 +36,9 @@ namespace ParadisePromotions.Data
     DbSet<Levels> Levels { get; set; } = null!;
     DbSet<ChargeBack> ChargeBack { get; set; } = null!;
 
-        // Reports
-        DbSet<BuyingHistory> BuyingHistory { get; set; } = null!;
+    // Reports
+    DbSet<BuyingHistory> BuyingHistory { get; set; } = null!;
+    DbSet<LastDisposition> LastDisposition { get; set; } = null!;
     }
 
 }
