@@ -34,6 +34,10 @@ namespace ParadisePromotions.Core.Interfaces
         IBuyingHistoryRepository BuyingHistory { get; }
         ILastDispositionRepository LastDisposition { get; }
         INextCallBackRepository NextCallBack { get; }
+
+        //Admin 
+        IRoleManagementRepository RoleManagement { get; }
+        IRoleModulesRepository RoleModules { get; }
         int Save();
     }
 }

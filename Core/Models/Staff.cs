@@ -3,6 +3,7 @@
     public class Staff
     {
         public int? StaffID { get; set; }
+        public int? RoleID { get; set; }
         public string? Name { get; set; }
         public string? SSN { get; set; }
         public DateTime? Hire_date { get; set; }
@@ -12,6 +13,7 @@
         public bool? IsVerifier { get; set; }
         public bool? IsActiveReloader { get; set; }
         public bool? Active { get; set; }
+
 
 
     }
