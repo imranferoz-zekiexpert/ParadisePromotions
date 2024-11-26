@@ -73,7 +73,10 @@ builder.Services.AddScoped<ILastDispositionRepository, LastDispositionRepository
 builder.Services.AddScoped<ILastDispositionService, LastDispositionService>();
 builder.Services.AddScoped<INextCallBackRepository, NextCallBackRepository>();
 builder.Services.AddScoped<INextCallBackService, NextCallBackService>();
-
+// Admin 
+builder.Services.AddScoped<IRoleManagementRepository, RoleManagementRepository>();
+builder.Services.AddScoped<IRoleModulesRepository, RoleModulesRepository>();
+builder.Services.AddScoped<IRoleManagementService, RoleManagementService>();
 //Middleware 
 var jwtKey = builder.Configuration["Jwt:JWT_KEY"];
 builder.Services.AddAuthentication(cfg => {

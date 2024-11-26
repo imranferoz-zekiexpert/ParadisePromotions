@@ -40,6 +40,13 @@ namespace ParadisePromotions.Data
     DbSet<BuyingHistory> BuyingHistory { get; set; } = null!;
     DbSet<LastDisposition> LastDisposition { get; set; } = null!;
     DbSet<NextCallBack> NextCallBack { get; set; } = null!;
+
+
+        // Admin
+        DbSet<UserRole> UserRoles { get; set; } = null!;
+        DbSet<AppModule> AppModules { get; set; } = null!;
+        DbSet<RoleModule> RoleModules { get; set; } = null!;
+
     }
 
 }

@@ -38,6 +38,8 @@ namespace ParadisePromotions.Core.Repositories
         public IBuyingHistoryRepository BuyingHistory { get; }
         public ILastDispositionRepository LastDisposition { get; }
         public INextCallBackRepository NextCallBack { get; }
+        public IRoleManagementRepository RoleManagement { get; }
+        public IRoleModulesRepository RoleModules { get; }
 
 
         public UnitOfWork(
@@ -68,7 +70,9 @@ namespace ParadisePromotions.Core.Repositories
             IChargeBackRepository chargeBackRepository,
             IBuyingHistoryRepository buyingHistoryRepository,
             ILastDispositionRepository lastDispositionRepository,
-            INextCallBackRepository nextCallBackRepository
+            INextCallBackRepository nextCallBackRepository,
+            IRoleManagementRepository roleManagementRepository,
+            IRoleModulesRepository roleModulesRepository
             )
         {
             _dbContext = dbContext;
@@ -99,6 +103,8 @@ namespace ParadisePromotions.Core.Repositories
             BuyingHistory = buyingHistoryRepository;
             LastDisposition = lastDispositionRepository;
             NextCallBack = nextCallBackRepository;
+            RoleManagement = roleManagementRepository;
+            RoleModules = roleModulesRepository;
         }
 
         public int Save()
