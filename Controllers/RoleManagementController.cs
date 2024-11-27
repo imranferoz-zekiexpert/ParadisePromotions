@@ -33,7 +33,7 @@ namespace ParadisePromotions.Controllers
         } 
         
         [HttpGet]
-        [Route("RoleModules")]
+        [Route("RoleModules/{id}")]
         public async Task<IActionResult> GetAllRoleModeules(int id)
         {
             try
