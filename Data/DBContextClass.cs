@@ -44,7 +44,7 @@ namespace ParadisePromotions.Data
 
         // Admin
         DbSet<UserRole> UserRoles { get; set; } = null!;
-        DbSet<AppModule> AppModules { get; set; } = null!;
+        DbSet<AppModule> AppModule { get; set; } = null!;
         DbSet<RoleModule> RoleModules { get; set; } = null!;
 
     }

@@ -7,9 +7,9 @@ namespace ParadisePromotions.Core.Models
     public class RoleModule
     {
         [Key]
-        public int ID { get; set; }
-        public string RoleID { get; set; }
-        public string ModuleID { get; set; }
+        public int? ID { get; set; }
+        public int? RoleID { get; set; }
+        public int? ModuleID { get; set; }
 
         public DateTime? CreatedDate { get; set; }
 

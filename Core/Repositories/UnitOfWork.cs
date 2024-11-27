@@ -40,6 +40,7 @@ namespace ParadisePromotions.Core.Repositories
         public INextCallBackRepository NextCallBack { get; }
         public IRoleManagementRepository RoleManagement { get; }
         public IRoleModulesRepository RoleModules { get; }
+        public IAppModuleRepository AppModule { get; }
 
 
         public UnitOfWork(
@@ -72,7 +73,8 @@ namespace ParadisePromotions.Core.Repositories
             ILastDispositionRepository lastDispositionRepository,
             INextCallBackRepository nextCallBackRepository,
             IRoleManagementRepository roleManagementRepository,
-            IRoleModulesRepository roleModulesRepository
+            IRoleModulesRepository roleModulesRepository,
+            IAppModuleRepository appModuleRepository
             )
         {
             _dbContext = dbContext;
@@ -105,6 +107,7 @@ namespace ParadisePromotions.Core.Repositories
             NextCallBack = nextCallBackRepository;
             RoleManagement = roleManagementRepository;
             RoleModules = roleModulesRepository;
+            AppModule= appModuleRepository;
         }
 
         public int Save()

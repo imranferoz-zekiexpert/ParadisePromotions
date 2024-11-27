@@ -76,6 +76,7 @@ builder.Services.AddScoped<INextCallBackService, NextCallBackService>();
 // Admin 
 builder.Services.AddScoped<IRoleManagementRepository, RoleManagementRepository>();
 builder.Services.AddScoped<IRoleModulesRepository, RoleModulesRepository>();
+builder.Services.AddScoped<IAppModuleRepository, AppModuleRepository>();
 builder.Services.AddScoped<IRoleManagementService, RoleManagementService>();
 //Middleware 
 var jwtKey = builder.Configuration["Jwt:JWT_KEY"];

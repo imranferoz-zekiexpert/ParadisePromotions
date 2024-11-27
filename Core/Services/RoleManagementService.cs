@@ -86,10 +86,17 @@ namespace ParadisePromotions.Core.Services
             var roles = await _unitOfWork.RoleManagement.GetAll();
             return roles;
         }
-        public async Task<IEnumerable<RoleModule>> GetAllRoleModeules()
+        public async Task<IEnumerable<RoleModule>> GetAllRoleModeules(int id)
         {
             var modules = await _unitOfWork.RoleModules.GetAll();
-            return modules;
+
+            return modules.Where(module => module.RoleID == id);
+        }
+        public async Task<IEnumerable<AppModule>> GetAllAppModule()
+        {
+            var appModules = await _unitOfWork.AppModule.GetAll();
+
+            return appModules;
         }
         public async Task<bool> UpdateRole(UserRole role)
         {
