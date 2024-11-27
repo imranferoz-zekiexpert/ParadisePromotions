@@ -118,7 +118,10 @@ namespace ParadisePromotions.Core.Services
 
                 // Retrieve all users (ideally, query the user directly rather than loading all users)
                 var users = await _unitOfWork.Users.GetAll(); 
+                var roles =await _unitOfWork.RoleManagement.GetAll();
                 var user = users.FirstOrDefault(u => u.StaffID == loginRequest.StaffID);
+                var role=roles.FirstOrDefault(r =>r.ID == user.RoleID);
+
 
                 if (user == null || !VerifyPasswordHash(loginRequest.Password, user.Password))
                 {
@@ -134,7 +137,9 @@ namespace ParadisePromotions.Core.Services
                     Subject = new ClaimsIdentity(new[]
                     {
             new Claim(ClaimTypes.NameIdentifier, user.StaffID.ToString()),
-            new Claim(ClaimTypes.Name, user.Name) // Assuming user.Name exists
+            new Claim(ClaimTypes.Name, user.Name),
+            new Claim(ClaimTypes.Role, role.Name),
+            new Claim("RoleID", user.RoleID.ToString()),
         }),
                     Expires = DateTime.UtcNow.AddMinutes(30),
                     SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
@@ -146,6 +151,12 @@ namespace ParadisePromotions.Core.Services
                 return new LoginResponceModel
                 {
                     Name = user.Name,
+                    Role = new UserRole
+                    {
+                        ID = role.ID,
+                        Name = role.Name, // Include additional details if needed
+                    },
+
                     token = userToken
                 };
             }
