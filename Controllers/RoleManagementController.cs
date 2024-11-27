@@ -34,12 +34,28 @@ namespace ParadisePromotions.Controllers
         
         [HttpGet]
         [Route("RoleModules")]
-        public async Task<IActionResult> GetAllRoleModeules()
+        public async Task<IActionResult> GetAllRoleModeules(int id)
         {
             try
             {
-                var modules = await _roleManagementService.GetAllRoleModeules();
+                var modules = await _roleManagementService.GetAllRoleModeules(id);
                 return Ok(modules);
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest();    
+            }
+        } 
+        
+        [HttpGet]
+        [Route("AppModules")]
+        public async Task<IActionResult> GetAllAppModules()
+        {
+            try
+            {
+                var appModules = await _roleManagementService.GetAllAppModule();
+                return Ok(appModules);
             }
             catch (Exception ex)
             {

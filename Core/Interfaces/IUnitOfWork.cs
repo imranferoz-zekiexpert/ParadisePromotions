@@ -38,6 +38,7 @@ namespace ParadisePromotions.Core.Interfaces
         //Admin 
         IRoleManagementRepository RoleManagement { get; }
         IRoleModulesRepository RoleModules { get; }
+        IAppModuleRepository AppModule { get; }
         int Save();
     }
 }
