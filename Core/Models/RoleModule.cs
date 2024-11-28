@@ -10,6 +10,7 @@ namespace ParadisePromotions.Core.Models
         public int? ID { get; set; }
         public int? RoleID { get; set; }
         public int? ModuleID { get; set; }
+        public string? Url { get; set; }
 
         public DateTime? CreatedDate { get; set; }
 
