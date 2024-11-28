@@ -3,6 +3,7 @@ using ParadisePromotions.Core.Interfaces;
 using ParadisePromotions.Core.Interfaces.IServices;
 using ParadisePromotions.Core.Models;
 using System.Data;
+using System.Reflection;
 
 namespace ParadisePromotions.Core.Services
 {
@@ -34,9 +35,17 @@ namespace ParadisePromotions.Core.Services
         {
             if (module != null)
             {
-
-                await _unitOfWork.RoleModules.Insert(module);
-                var result = _unitOfWork.Save();
+                var result=0;
+                var roleModules=  await _unitOfWork.RoleModules.GetAll();
+                if(roleModules.Any(m => m.RoleID == module.RoleID && m.ModuleID == module.ModuleID))
+                {
+                    result = 0;
+                }
+                else
+                {                   
+                    await _unitOfWork.RoleModules.Insert(module);
+                    result = _unitOfWork.Save();
+                }
 
                 if (result > 0)
                     return true;
