@@ -89,6 +89,7 @@ namespace ParadisePromotions.Core.Services
             existingUser.StaffID = user.StaffID;
             existingUser.Name = user.Name;
             existingUser.SSN = user.SSN;
+            existingUser.RoleID = user.RoleID;
             existingUser.Password = user.Password;
             existingUser.Hire_date = user.Hire_date;
             existingUser.Class = user.Class;
