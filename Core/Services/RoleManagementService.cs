@@ -20,7 +20,7 @@ namespace ParadisePromotions.Core.Services
         {
             if (role != null)
             {
-               
+                role.CreatedDate = DateTime.Now;
                 await _unitOfWork.RoleManagement.Insert(role);
                 var result = _unitOfWork.Save();
 
@@ -42,7 +42,8 @@ namespace ParadisePromotions.Core.Services
                     result = 0;
                 }
                 else
-                {                   
+                {
+                    module.CreatedDate = DateTime.Now;               
                     await _unitOfWork.RoleModules.Insert(module);
                     result = _unitOfWork.Save();
                 }
@@ -124,7 +125,7 @@ namespace ParadisePromotions.Core.Services
             // Update the properties of the existing role with the new values
             existingRole.Name = role.Name;
             existingRole.Active = role.Active;
-            existingRole.UpdatedDate = DateTime.UtcNow;
+            existingRole.UpdatedDate = DateTime.Now;
 
             // Perform the update in the database
             _unitOfWork.RoleManagement.Update(existingRole);
