@@ -107,5 +107,39 @@ namespace ParadisePromotions.Controllers
         }
 
 
+
+        [HttpGet("sales-count")]
+        public async Task<IActionResult> GetSalesCount([FromBody] SalesFilter filter)
+        {
+            try
+            {
+                // Validate input parameters
+                if (string.IsNullOrWhiteSpace(filter.UserID) || string.IsNullOrWhiteSpace(filter.StartDate) || string.IsNullOrWhiteSpace(filter.EndDate))
+                {
+                    return BadRequest("SalesPerson ID, startDate, and endDate are required.");
+                }
+
+                // Call the service method
+                var salesCount = await _blankSalesService.GetSalesCount(filter);
+
+                if (!salesCount.Any())
+                {
+                    return NotFound("No sales found for the specified criteria.");
+                }
+
+                // Return the results
+                return Ok(salesCount);
+            }
+            catch (ArgumentException ex)
+            {
+                // Handle invalid date formats
+                return BadRequest(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                // Handle other errors
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
     }
 }

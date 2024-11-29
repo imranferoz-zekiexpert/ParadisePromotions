@@ -56,7 +56,7 @@ namespace ParadisePromotions.Core.Services
         public async Task<IEnumerable<BlankSale>> GetAllBlankSales()
         {
             var blankSales = await _unitOfWork.BlankSales.GetAll();
-            return blankSales; ;
+            return blankSales;
         }
 
         public async Task<BlankSale> GetBlankSaleById(int id)
@@ -169,6 +169,26 @@ namespace ParadisePromotions.Core.Services
             // Save the changes
             var result = _unitOfWork.Save();
             return result > 0;
+        }
+
+        public async Task<IEnumerable<BlankSale>> GetSalesCount(SalesFilter filter)
+        {
+            // Parse the startDate and endDate strings to DateTime
+            if (!DateTime.TryParse(filter.StartDate, out var parsedStartDate) ||
+                !DateTime.TryParse(filter.EndDate, out var parsedEndDate))
+            {
+                throw new ArgumentException("Invalid date format for startDate or endDate.");
+            }
+
+            // Fetch all BlankSales
+            var blankSales = await _unitOfWork.BlankSales.GetAll();
+
+            // Filter the sales
+            var filteredSales = blankSales.Where(s => s.SalesPerson == filter.UserID &&
+                                                      s.Sale_Date > parsedStartDate &&
+                                                      s.Sale_Date < parsedEndDate);
+
+            return filteredSales;
         }
 
 

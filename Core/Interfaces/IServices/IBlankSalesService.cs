@@ -9,5 +9,6 @@ namespace ParadisePromotions.Core.Interfaces.IServices
         Task<BlankSale> GetBlankSaleById(int id);
         Task<bool> UpdateBlankSale(BlankSale blankSale);
         Task<bool> DeleteBlankSale(int id);
+        Task<IEnumerable<BlankSale>> GetSalesCount(SalesFilter filter);
     }
 }
