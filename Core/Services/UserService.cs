@@ -90,6 +90,7 @@ namespace ParadisePromotions.Core.Services
             existingUser.Name = user.Name;
             existingUser.SSN = user.SSN;
             existingUser.RoleID = user.RoleID;
+            existingUser.sales_target = user.sales_target;
             existingUser.Password = user.Password;
             existingUser.Hire_date = user.Hire_date;
             existingUser.Class = user.Class;
@@ -153,6 +154,7 @@ namespace ParadisePromotions.Core.Services
                 {
                     Name = user.Name,
                     Id=user.StaffID.ToString(),
+                    sales_target=user.sales_target,
                     Role = new UserRole
                     {
                         ID = role.ID,
