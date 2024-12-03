@@ -152,6 +152,7 @@ namespace ParadisePromotions.Core.Services
                 return new LoginResponceModel
                 {
                     Name = user.Name,
+                    Id=user.StaffID.ToString(),
                     Role = new UserRole
                     {
                         ID = role.ID,

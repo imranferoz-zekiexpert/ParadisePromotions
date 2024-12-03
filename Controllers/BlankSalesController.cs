@@ -107,8 +107,8 @@ namespace ParadisePromotions.Controllers
         }
 
 
-
-        [HttpGet("sales-count")]
+        [HttpPost]
+        [Route("sales-count")]
         public async Task<IActionResult> GetSalesCount([FromBody] SalesFilter filter)
         {
             try
@@ -121,11 +121,6 @@ namespace ParadisePromotions.Controllers
 
                 // Call the service method
                 var salesCount = await _blankSalesService.GetSalesCount(filter);
-
-                if (!salesCount.Any())
-                {
-                    return NotFound("No sales found for the specified criteria.");
-                }
 
                 // Return the results
                 return Ok(salesCount);
