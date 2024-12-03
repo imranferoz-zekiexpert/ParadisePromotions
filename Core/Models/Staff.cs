@@ -4,6 +4,7 @@
     {
         public int? StaffID { get; set; }
         public int? RoleID { get; set; }
+        public int? sales_target { get; set; }
         public string? Name { get; set; }
         public string? SSN { get; set; }
         public DateTime? Hire_date { get; set; }
@@ -28,6 +29,7 @@
     {
         public string? Id { get; set; }
         public string? Name { get; set; }
+        public int? sales_target { get; set; }
         public UserRole? Role { get; set; }
         public string? token { get; set; }
     }
