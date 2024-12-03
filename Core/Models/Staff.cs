@@ -26,6 +26,7 @@
 
     public class LoginResponceModel
     {
+        public string? Id { get; set; }
         public string? Name { get; set; }
         public UserRole? Role { get; set; }
         public string? token { get; set; }
