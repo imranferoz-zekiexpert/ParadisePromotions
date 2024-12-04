@@ -60,7 +60,7 @@ namespace ParadisePromotions.Core.Services
             if (id > 0)
             {
                 var role = await _unitOfWork.RoleManagement.GetById(id);
-                if (role != null && role.ID != 7)
+                if (role != null && role.ID != 7 && role.ID != 8)
                 {
                     _unitOfWork.RoleManagement.Delete(role);
                     var result = _unitOfWork.Save();
