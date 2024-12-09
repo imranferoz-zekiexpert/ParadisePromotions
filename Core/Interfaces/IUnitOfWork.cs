@@ -29,6 +29,7 @@ namespace ParadisePromotions.Core.Interfaces
         ITimeZonesRepository TimeZones { get; }
         ITouchLogRepository TouchLog { get; }
         IChargeBackRepository ChargeBack { get; }
+        ILeadsRepository Leads { get; }
 
         // Reports 
         IBuyingHistoryRepository BuyingHistory { get; }

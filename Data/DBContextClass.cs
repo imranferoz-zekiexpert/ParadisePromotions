@@ -22,6 +22,7 @@ namespace ParadisePromotions.Data
     DbSet<Bonus> Bonus { get; set; } = null!;
     DbSet<TimeZones> TimeZones { get; set; } = null!;
     DbSet<TouchLog> TouchLog { get; set; } = null!;
+    DbSet<Lead> Leads { get; set; } = null!;
     DbSet<QryBlankSalePrintGreenSheetMain> QryBlankSalePrintGreenSheetMain { get; set; } = null!;
     // Setup Codes
     DbSet<Zips> Zip { get; set; } = null!;

@@ -18,6 +18,7 @@ namespace ParadisePromotions.Core.Repositories
         public IBlankSalesRepository BlankSales { get; }
         public IInvoicesRepository Invoices { get; }
         public IInventoryRepository Inventory { get; }
+        public ILeadsRepository Leads { get; }
         public IQryBlankSalePrintGreenSheetMainRepository QryBlankSalePrintGreenSheetMain { get; }
         public IZipRepository Zip { get; }
         public ISaleTypeRepository SaleType { get; }
@@ -74,7 +75,8 @@ namespace ParadisePromotions.Core.Repositories
             INextCallBackRepository nextCallBackRepository,
             IRoleManagementRepository roleManagementRepository,
             IRoleModulesRepository roleModulesRepository,
-            IAppModuleRepository appModuleRepository
+            IAppModuleRepository appModuleRepository,
+            ILeadsRepository leadsRepository
             )
         {
             _dbContext = dbContext;
@@ -108,6 +110,7 @@ namespace ParadisePromotions.Core.Repositories
             RoleManagement = roleManagementRepository;
             RoleModules = roleModulesRepository;
             AppModule= appModuleRepository;
+            Leads= leadsRepository;
         }
 
         public int Save()
