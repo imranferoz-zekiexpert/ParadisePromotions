@@ -27,6 +27,8 @@ options.UseSqlServer(connectionString));
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<ILeadsRepository, LeadsRepository>();
+builder.Services.AddScoped<ILeadsService, LeadsService>();
 builder.Services.AddScoped<IProductsRepository, ProductsRepository>();
 builder.Services.AddScoped<IProductsService, ProductsService>();
 builder.Services.AddScoped<ICustomersRepository, CustomersRepository>();

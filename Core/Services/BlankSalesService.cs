@@ -185,8 +185,8 @@ namespace ParadisePromotions.Core.Services
 
             // Filter the sales
             var filteredSales = blankSales.Where(s => s.SalesPerson == filter.UserID &&
-                                                      s.Sale_Date > parsedStartDate &&
-                                                      s.Sale_Date < parsedEndDate);
+                                                      s.Sale_Date >= parsedStartDate &&
+                                                      s.Sale_Date <= parsedEndDate);
 
             return filteredSales;
         }
