@@ -16,7 +16,7 @@ namespace ParadisePromotions.Core.Models
         public int? LastDispositionId { get; set; }
         public DateTime? DispDateTime { get; set; }
         public DateTime? LastSaleDate { get; set; }
-        public DateTime CreatedDate { get; set; }
+        public DateTime? CreatedDate { get; set; }
         public DateTime? UpdatedDate { get; set; }
     }
 }
