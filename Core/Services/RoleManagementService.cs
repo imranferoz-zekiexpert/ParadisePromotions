@@ -55,31 +55,55 @@ namespace ParadisePromotions.Core.Services
             }
             return false;
         }
-        public async Task<bool> DeleteRole(int id)
+        public async Task<RoleMngResponse> DeleteRole(int id)
         {
+            var response = new RoleMngResponse();
             if (id > 0)
             {
                 var role = await _unitOfWork.RoleManagement.GetById(id);
                 if (role != null && role.ID != 7 && role.ID != 8)
                 {
+                    var usersWithRole = await _unitOfWork.Users.GetAll();
+                    if (usersWithRole != null && usersWithRole.Any(u=>u.RoleID == role.ID))
+                    {   response.Success = false;
+                        response.message = "Role cannot be deleted as it is assigned to one or more users";
+                        return response;
+                    }
                     _unitOfWork.RoleManagement.Delete(role);
                     var result = _unitOfWork.Save();
 
                     if (result > 0)
-                        return true;
+                    {
+                        response.Success = true;
+                        response.message = "Role deleted!";
+                        return response;
+                    }
                     else
-                        return false;
+                    {
+                        response.Success = false;
+                        response.message = "Some roles deletion not allowed!";
+                        return response;
+                    }
+                       
                 }
             }
-            return false;
+
+            response.Success = false;
+            response.message = "Deletion faild!";
+            return response;
         }
         public async Task<bool> DeleteRoleModule(int id)
         {
             if (id > 0)
             {
                 var module = await _unitOfWork.RoleModules.GetById(id);
+
                 if (module != null)
                 {
+                    if (module.ModuleID == 54 && module.RoleID == 7)
+                    {
+                        return false;
+                    }
                     _unitOfWork.RoleModules.Delete(module);
                     var result = _unitOfWork.Save();
 

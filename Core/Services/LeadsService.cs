@@ -22,7 +22,7 @@ namespace ParadisePromotions.Core.Services
         {
             if (leads != null)
             {
-               
+               leads.CreatedDate = DateTime.Now;
                 await _unitOfWork.Leads.Insert(leads);
                 var result = _unitOfWork.Save();
 
@@ -91,6 +91,7 @@ namespace ParadisePromotions.Core.Services
             existingLeads.Comments = leads.Comments;
             existingLeads.Phone1 = leads.Phone1;
             existingLeads.CustomerId = leads.CustomerId;
+            existingLeads.StaffId = leads.StaffId;
             existingLeads.CycleId = leads.CycleId;
             existingLeads.TimeZoneId = leads.TimeZoneId;
             existingLeads.CallBackDate = leads.CallBackDate;
@@ -106,7 +107,25 @@ namespace ParadisePromotions.Core.Services
             var result = _unitOfWork.Save();
             return result > 0;
         }
+        public async Task<IEnumerable<Lead>> GetLeadsCount(LeadsFilter filter)
+        {
+            // Parse the startDate and endDate strings to DateTime
+            if (!DateTime.TryParse(filter.StartDate, out var parsedStartDate) ||
+                !DateTime.TryParse(filter.EndDate, out var parsedEndDate))
+            {
+                throw new ArgumentException("Invalid date format for startDate or endDate.");
+            }
 
+            // Fetch all BlankSales
+            var leads = await _unitOfWork.Leads.GetAll();
+            parsedEndDate = parsedEndDate.Date.AddDays(1);
+            // Filter the sales
+            var filteredLeads = leads.Where(s => s.StaffId.ToString() == filter.UserID.ToString() &&
+                                                      s.CreatedDate >= parsedStartDate &&
+                                                      s.CreatedDate < parsedEndDate);
+
+            return filteredLeads;
+        }
 
     }
 }

@@ -10,6 +10,7 @@ namespace ParadisePromotions.Core.Models
         public string? Comments { get; set; }
         public string? Phone1 { get; set; }
         public int? CustomerId { get; set; }
+        public string? StaffId { get; set; }
         public int? CycleId { get; set; }
         public int? TimeZoneId { get; set; }
         public DateTime? CallBackDate { get; set; }

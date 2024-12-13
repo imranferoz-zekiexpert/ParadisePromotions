@@ -1,4 +1,5 @@
 ﻿
+using Azure;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ParadisePromotions.Core.Interfaces.IServices;
@@ -132,16 +133,16 @@ namespace ParadisePromotions.Controllers
         public async Task<IActionResult> DeleteRole(int id)
         {
             // Call the service method to delete the pars
-            var isDeleted = await _roleManagementService.DeleteRole(id);
+            var response = await _roleManagementService.DeleteRole(id);
 
             // If deletion was unsuccessful, return a not found or bad request response
-            if (!isDeleted)
+            if (!response.Success)
             {
-                return NotFound(new { message = "Role not found or deletion failed." });
+                return BadRequest(new { message = response.message });
             }
 
             // If deletion was successful
-            return Ok(new { message = "Role deleted successfully" });
+            return Ok(new { message = response.message });
         }
         
         [HttpDelete("DeleteRoleModule/{id}")]

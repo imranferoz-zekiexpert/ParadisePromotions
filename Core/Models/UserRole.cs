@@ -17,3 +17,9 @@ namespace ParadisePromotions.Core.Models
         public bool? Active { get; set; }
     }
 }
+public class RoleMngResponse
+{
+    public bool Success { get; set; }
+    public string message { get; set; }
+  
+}

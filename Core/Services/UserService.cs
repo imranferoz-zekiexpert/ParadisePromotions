@@ -122,14 +122,14 @@ namespace ParadisePromotions.Core.Services
                 var users = await _unitOfWork.Users.GetAll(); 
                 var roles =await _unitOfWork.RoleManagement.GetAll();
                 var user = users.FirstOrDefault(u => u.StaffID == loginRequest.StaffID);
-                var role=roles.FirstOrDefault(r =>r.ID == user.RoleID);
+               
 
 
                 if (user == null || !VerifyPasswordHash(loginRequest.Password, user.Password))
                 {
                     return null; // Invalid staff ID or password
                 }
-
+                var role = roles.FirstOrDefault(r => r.ID == user.RoleID);
                 // Create JWT token
                 var jwtKey = _configuration["Jwt:JWT_KEY"];
                 var tokenHandler = new JwtSecurityTokenHandler();
