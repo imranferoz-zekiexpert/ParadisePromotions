@@ -10,7 +10,7 @@ namespace ParadisePromotions.Core.Interfaces.IServices
         Task<IEnumerable<AppModule>> GetAllAppModule();
         Task<IEnumerable<RoleModule>> GetAllRoleModeules(int id);
         Task<bool> UpdateRole(UserRole role);
-        Task<bool> DeleteRole(int id);
+        Task<RoleMngResponse> DeleteRole(int id);
         Task<bool> DeleteRoleModule(int id);
     }
 }

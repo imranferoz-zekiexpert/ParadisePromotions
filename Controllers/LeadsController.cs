@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ParadisePromotions.Core.Interfaces.IServices;
 using ParadisePromotions.Core.Models;
+using ParadisePromotions.Core.Services;
 
 namespace ParadisePromotions.Controllers
 {
@@ -107,6 +108,36 @@ namespace ParadisePromotions.Controllers
             return Ok(new { message = "Leads deleted successfully" });
         }
 
+
+        [HttpPost]
+        [Route("leads-count")]
+        public async Task<IActionResult> GetLeadsCount([FromBody] LeadsFilter filter)
+        {
+            try
+            {
+                // Validate input parameters
+                if (string.IsNullOrWhiteSpace(filter.UserID) || string.IsNullOrWhiteSpace(filter.StartDate) || string.IsNullOrWhiteSpace(filter.EndDate))
+                {
+                    return BadRequest("Staff ID, startDate, and endDate are required.");
+                }
+
+                // Call the service method
+                var leadsCount = await _leadsService.GetLeadsCount(filter);
+
+                // Return the results
+                return Ok(leadsCount);
+            }
+            catch (ArgumentException ex)
+            {
+                // Handle invalid date formats
+                return BadRequest(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                // Handle other errors
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
 
     }
 }

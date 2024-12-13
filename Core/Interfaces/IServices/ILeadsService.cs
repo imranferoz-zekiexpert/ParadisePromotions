@@ -9,5 +9,6 @@ namespace ParadisePromotions.Core.Interfaces.IServices
         Task<Lead> GetLeadsById(int id);
         Task<bool> UpdateLeads(Lead pars);
         Task<bool> DeleteLeads(int id);
+        Task<IEnumerable<Lead>> GetLeadsCount(LeadsFilter filter);
     }
 }
