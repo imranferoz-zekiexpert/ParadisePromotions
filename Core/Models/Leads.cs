@@ -10,7 +10,8 @@ namespace ParadisePromotions.Core.Models
         public string? Comments { get; set; }
         public string? Phone1 { get; set; }
         public int? CustomerId { get; set; }
-        public string? StaffId { get; set; }
+        public int? AssignedTo { get; set; }
+        public DateTime? AssignDate { get; set; }
         public int? CycleId { get; set; }
         public int? TimeZoneId { get; set; }
         public DateTime? CallBackDate { get; set; }
@@ -18,6 +19,8 @@ namespace ParadisePromotions.Core.Models
         public DateTime? DispDateTime { get; set; }
         public DateTime? LastSaleDate { get; set; }
         public DateTime? CreatedDate { get; set; }
+        public int? CreatedBy { get; set; }
         public DateTime? UpdatedDate { get; set; }
+        public int? UpdatedBy { get; set; }
     }
 }
