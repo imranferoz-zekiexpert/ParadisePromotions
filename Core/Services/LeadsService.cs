@@ -91,7 +91,11 @@ namespace ParadisePromotions.Core.Services
             existingLeads.Comments = leads.Comments;
             existingLeads.Phone1 = leads.Phone1;
             existingLeads.CustomerId = leads.CustomerId;
-            existingLeads.StaffId = leads.StaffId;
+            if (leads.AssignedTo != null)
+            {
+                existingLeads.AssignedTo = leads.AssignedTo;
+                existingLeads.AssignDate= DateTime.Now;
+            }           
             existingLeads.CycleId = leads.CycleId;
             existingLeads.TimeZoneId = leads.TimeZoneId;
             existingLeads.CallBackDate = leads.CallBackDate;
@@ -99,6 +103,8 @@ namespace ParadisePromotions.Core.Services
             existingLeads.DispDateTime = leads.DispDateTime;
             existingLeads.LastSaleDate = leads.LastSaleDate;
             existingLeads.UpdatedDate = DateTime.Now;
+            existingLeads.UpdatedBy = leads.UpdatedBy;
+
 
             // Perform the update in the database
             _unitOfWork.Leads.Update(existingLeads);
@@ -120,9 +126,9 @@ namespace ParadisePromotions.Core.Services
             var leads = await _unitOfWork.Leads.GetAll();
             parsedEndDate = parsedEndDate.Date.AddDays(1);
             // Filter the sales
-            var filteredLeads = leads.Where(s => s.StaffId.ToString() == filter.UserID.ToString() &&
-                                                      s.CreatedDate >= parsedStartDate &&
-                                                      s.CreatedDate < parsedEndDate);
+            var filteredLeads = leads.Where(s => (s.AssignedTo.ToString() == filter.UserID.ToString() ||
+                                                  s.CreatedBy.ToString() == filter.UserID.ToString()) &&
+                                                      (s.CreatedDate >= parsedStartDate && s.CreatedDate < parsedEndDate));
 
             return filteredLeads;
         }
