@@ -6,8 +6,13 @@ namespace ParadisePromotions.Core.Models.ReportsModels
     public class NextCallBack
     {
         public int? Id { get; set; }
-        public int? CustomerID { get; set; }
+        public int? CustomerId { get; set; }
+        public int? CreatedBy { get; set; }
+        public DateTime? CreatedDate { get; set; }
+        public DateTime? UpdatedDate { get; set; }
+        public int? UpdatedBy { get; set; }
+        public DateTime? CallDateTime { get; set; }
         public DateTime? CallBackDateTime { get; set; }
-        public DateTime? CallBackDate { get; set; }
+        public string? Comment { get; set; }
     }
 }

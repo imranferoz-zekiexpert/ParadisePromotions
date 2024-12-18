@@ -17,7 +17,7 @@ namespace ParadisePromotions.Core.Services.ReportsServices
         {
             if (nextCallBack != null)
             {
-
+                nextCallBack.CreatedDate = DateTime.Now;
                 await _unitOfWork.NextCallBack.Insert(nextCallBack);
                 var result = _unitOfWork.Save();
 
@@ -69,12 +69,12 @@ namespace ParadisePromotions.Core.Services.ReportsServices
 
         public async Task<bool> UpdateNextCallBack(NextCallBack nextCallBack)
         {
-            if (nextCallBack == null)
+            if (nextCallBack == null || nextCallBack.Id == null)
             {
                 return false;
             }
 
-            // Fetch the existing nextCallBack item by Id (assuming Id is the unique identifier)
+            // Fetch the existing nextCallBack item by Id
             var existingNextCallBack = await _unitOfWork.NextCallBack.GetById(nextCallBack.Id);
             if (existingNextCallBack == null)
             {
@@ -82,9 +82,12 @@ namespace ParadisePromotions.Core.Services.ReportsServices
             }
 
             // Update the properties of the existing nextCallBack with the new values
-            existingNextCallBack.CustomerID = nextCallBack.CustomerID;
+            existingNextCallBack.CustomerId = nextCallBack.CustomerId;
             existingNextCallBack.CallBackDateTime = nextCallBack.CallBackDateTime;
-            existingNextCallBack.CallBackDate = nextCallBack.CallBackDate;
+            existingNextCallBack.CallDateTime = nextCallBack.CallDateTime;
+            existingNextCallBack.Comment = nextCallBack.Comment;
+            existingNextCallBack.UpdatedBy = nextCallBack.UpdatedBy;
+            existingNextCallBack.UpdatedDate = DateTime.Now;
 
             // Perform the update in the database
             _unitOfWork.NextCallBack.Update(existingNextCallBack);
@@ -93,6 +96,7 @@ namespace ParadisePromotions.Core.Services.ReportsServices
             var result = _unitOfWork.Save();
             return result > 0;
         }
+
 
 
 
