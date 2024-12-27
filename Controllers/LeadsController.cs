@@ -71,12 +71,12 @@ namespace ParadisePromotions.Controllers
         }
 
         [HttpPut("UpdateLeads")]
-        public async Task<IActionResult> UpdateLeads([FromBody] Lead leads)
+        public async Task<IActionResult> UpdateLeads([FromBody] IEnumerable<Lead> leads)
         {
-            // Validate the incoming leads object
-            if (leads == null || leads.Id <= 0)
+            // Validate the incoming leads collection
+            if (leads == null || !leads.Any())
             {
-                return BadRequest(new { message = "Invalid leads data" });
+                return BadRequest(new { message = "Invalid or empty leads data" });
             }
 
             // Call the service to update the leads
@@ -85,12 +85,13 @@ namespace ParadisePromotions.Controllers
             // Check if the update was successful
             if (!isUpdated)
             {
-                return NotFound(new { message = "Leads not found or update failed" });
+                return NotFound(new { message = "Some leads were not found or the update failed" });
             }
 
             // Return a success response
             return Ok(new { message = "Leads updated successfully" });
         }
+
 
         [HttpDelete("DeleteLeads/{id}")]
         public async Task<IActionResult> DeleteLeads(int id)

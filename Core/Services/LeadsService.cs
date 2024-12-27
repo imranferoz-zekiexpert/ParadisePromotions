@@ -72,47 +72,52 @@ namespace ParadisePromotions.Core.Services
             return null;
         }
 
-        public async Task<bool> UpdateLeads(Lead leads)
+        public async Task<bool> UpdateLeads(IEnumerable<Lead> leads)
         {
-            if (leads == null)
+            if (leads == null || !leads.Any())
             {
                 return false;
             }
 
-            // Fetch the existing leads item by ID
-            var existingLeads = await _unitOfWork.Leads.GetById(leads.Id);
-            if (existingLeads == null)
+            foreach (var lead in leads)
             {
-                return false;
+                // Fetch the existing lead item by ID
+                var existingLead = await _unitOfWork.Leads.GetById(lead.Id);
+                if (existingLead == null)
+                {
+                    continue; // Skip if the lead does not exist
+                }
+
+                // Update the properties of the existing lead with the new values
+                existingLead.CompanyName = lead.CompanyName;
+                existingLead.Comments = lead.Comments;
+                existingLead.Phone1 = lead.Phone1;
+                existingLead.CustomerId = lead.CustomerId;
+
+                if (lead.AssignedTo != null)
+                {
+                    existingLead.AssignedTo = lead.AssignedTo;
+                    existingLead.AssignDate = DateTime.Now;
+                }
+
+                existingLead.CycleId = lead.CycleId;
+                existingLead.TimeZoneId = lead.TimeZoneId;
+                existingLead.CallBackDate = lead.CallBackDate;
+                existingLead.LastDispositionId = lead.LastDispositionId;
+                existingLead.DispDateTime = lead.DispDateTime;
+                existingLead.LastSaleDate = lead.LastSaleDate;
+                existingLead.UpdatedDate = DateTime.Now;
+                existingLead.UpdatedBy = lead.UpdatedBy;
+
+                // Perform the update in the database
+                _unitOfWork.Leads.Update(existingLead);
             }
-
-            // Update the properties of the existing leads with the new values
-            existingLeads.CompanyName = leads.CompanyName;
-            existingLeads.Comments = leads.Comments;
-            existingLeads.Phone1 = leads.Phone1;
-            existingLeads.CustomerId = leads.CustomerId;
-            if (leads.AssignedTo != null)
-            {
-                existingLeads.AssignedTo = leads.AssignedTo;
-                existingLeads.AssignDate= DateTime.Now;
-            }           
-            existingLeads.CycleId = leads.CycleId;
-            existingLeads.TimeZoneId = leads.TimeZoneId;
-            existingLeads.CallBackDate = leads.CallBackDate;
-            existingLeads.LastDispositionId = leads.LastDispositionId;
-            existingLeads.DispDateTime = leads.DispDateTime;
-            existingLeads.LastSaleDate = leads.LastSaleDate;
-            existingLeads.UpdatedDate = DateTime.Now;
-            existingLeads.UpdatedBy = leads.UpdatedBy;
-
-
-            // Perform the update in the database
-            _unitOfWork.Leads.Update(existingLeads);
 
             // Save the changes
             var result = _unitOfWork.Save();
             return result > 0;
         }
+
         public async Task<IEnumerable<Lead>> GetLeadsCount(LeadsFilter filter)
         {
             // Parse the startDate and endDate strings to DateTime
