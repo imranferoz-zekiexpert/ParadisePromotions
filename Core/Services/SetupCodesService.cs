@@ -573,7 +573,7 @@ namespace ParadisePromotions.Core.Services
         {
             if (cycle != null)
             {
-
+                cycle.CreatedDate = DateTime.Now;
                 await _unitOfWork.Cycles.Insert(cycle);
                 var result = _unitOfWork.Save();
 
@@ -630,20 +630,28 @@ namespace ParadisePromotions.Core.Services
                 return false;
             }
 
-            var existingCycles = await _unitOfWork.Cycles.GetById(cycle.ID);
-            if (existingCycles == null)
+            // Fetch the existing cycle from the database
+            var existingCycle = await _unitOfWork.Cycles.GetById(cycle.ID);
+            if (existingCycle == null)
             {
                 return false;
             }
 
-            // Update only the necessary property of the existing Cycles
-            existingCycles.Cycle = cycle.Cycle;
-            _unitOfWork.Cycles.Update(existingCycles);
+            // Update properties of the existing cycle with values from the input
+            existingCycle.Cycle = cycle.Cycle;
+            existingCycle.StaffId = cycle.StaffId;
+            existingCycle.CreatedDate = cycle.CreatedDate;
+            existingCycle.UpdatedDate = DateTime.UtcNow; // Set the updated date to the current UTC time
+            existingCycle.UpdatedBy = cycle.UpdatedBy; // Update by current user ID or input value
 
-            // Save the changes
-            var result = _unitOfWork.Save(); // Assuming SaveAsync is an async method
+            // Update the entity in the unit of work
+            _unitOfWork.Cycles.Update(existingCycle);
+
+            // Save changes asynchronously and check the result
+            var result = _unitOfWork.Save();
             return result > 0;
         }
+
 
         // Disposition CRUD operations
         public async Task<bool> CreateDisposition(Disposition disposition)
