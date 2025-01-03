@@ -8,7 +8,7 @@ namespace ParadisePromotions.Core.Models.Codes
     {
         public int? ID { get; set; }
         public string? Cycle { get; set; }  // 'Cycle' might be a reserved keyword, so naming it CycleName to avoid conflicts.
-        public int? StaffId { get; set; }
+        public string? StaffId { get; set; }
         public DateTime? CreatedDate { get; set; }
         public int? CreatedBy { get; set; }
         public DateTime? UpdatedDate { get; set; }
