@@ -22,5 +22,12 @@ namespace ParadisePromotions.Core.Models
         public int? CreatedBy { get; set; }
         public DateTime? UpdatedDate { get; set; }
         public int? UpdatedBy { get; set; }
+        public bool? CC_Ran { get; set; }
+        public bool? PO_Made { get; set; }
+        public bool? Art_Made { get; set; }
+        public bool? Checked { get; set; }
+        public bool? Submitted { get; set; }
+        public bool? Activate { get; set; }
     }
+
 }
