@@ -81,14 +81,12 @@ namespace ParadisePromotions.Core.Services
 
             foreach (var lead in leads)
             {
-                // Fetch the existing lead item by ID
                 var existingLead = await _unitOfWork.Leads.GetById(lead.Id);
                 if (existingLead == null)
                 {
-                    continue; // Skip if the lead does not exist
-                }
+                    continue;                 }
 
-                // Update the properties of the existing lead with the new values
+                
                 existingLead.CompanyName = lead.CompanyName;
                 existingLead.Comments = lead.Comments;
                 existingLead.Phone1 = lead.Phone1;
@@ -108,15 +106,18 @@ namespace ParadisePromotions.Core.Services
                 existingLead.LastSaleDate = lead.LastSaleDate;
                 existingLead.UpdatedDate = DateTime.Now;
                 existingLead.UpdatedBy = lead.UpdatedBy;
-
-                // Perform the update in the database
+                existingLead.CC_Ran = lead.CC_Ran;
+                existingLead.PO_Made = lead.PO_Made;
+                existingLead.Art_Made = lead.Art_Made;
+                existingLead.Checked = lead.Checked;
+                existingLead.Submitted = lead.Submitted;
+                existingLead.Activate = lead.Activate;
                 _unitOfWork.Leads.Update(existingLead);
             }
-
-            // Save the changes
             var result = _unitOfWork.Save();
             return result > 0;
         }
+
 
         public async Task<IEnumerable<Lead>> GetLeadsCount(LeadsFilter filter)
         {
